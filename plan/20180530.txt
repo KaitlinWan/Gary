@@ -1,0 +1,14 @@
+Team Gary Plan Update 2018-05-30
+
+Jobs to be completed in order of necessity/priority:
+0. [CORE FUNCTIONALITY] Bring all project members' libraries up to full workability, with all files configured according to the installation documentation.
+1. [CORE FUNCTIONALITY] Resolve the issue of rate limiting when issuing queries for tweets
+Rate limiting occurs when twitter limits the amount of requests that can be issued in a certain window of time. This number is 180 query requests per every 15 minutes. We made the mistake of issuing these requests from the draw() method in Processing which loops 60 times a second, thus exceeding this capacity in three seconds.
+2. Determine how we actually wish to apply twitter and data that can be gathered. We have narrowed it down to several options:
+- Creating visual trees of tweets containing a certain hashtag or string sorted by popularity
+- Using query requests to structure data: such as using stock ticker symbols to analyze tweets regarding buying, selling, shorting, etc. of stock, then placing that into the aforementioned tree.
+3. Learn to cache tweets to better store and then access data: perhaps using a linked list, or a binary search tree sorted by date to analyze trends in the data
+
+Item 0 can be done individually, but items 1-3 should be completed collaboratively.
+
+Item 1 is a prerequisite for items 2 & 3, item 0 is crucial for all teammates to be able to work independently on the project.

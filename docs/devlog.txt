@@ -9,7 +9,7 @@ Group Initiated (SQUADED UP)
 : All Members
 ===============================================================
 5/22/18
-Group Name of AWESOME decided. “Gary” after our pre-calculus teacher “Mr. Rubenstein”
+Group Name of AWESOME decided. “Gary” after our pre-calculus teacher “Mr. Rubinstein”, and the lovable character from Spongebob Squarepants
 : All Members
 ===============================================================
 5/23/18
@@ -28,6 +28,7 @@ Imported Twitter Library
 5/30/18
 Twitter Developer Account approved!!! (BIG UP!!)
 ===============================================================
-
-
-
+5/30/18
+Investigated rate limiting, worked to find solutions towards limiting of queries and also storing tweets for later use in caches
+: Joshua Weiner
+===============================================================

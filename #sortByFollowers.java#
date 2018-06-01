@@ -1,0 +1,16 @@
+import twitter4j.conf.*; 
+import twitter4j.api.*; 
+import twitter4j.*; 
+import java.util.*;  
+
+public class sortByFollowers {
+    ConfigurationBuilder   cb; 
+    Query query; 
+    Twitter twitter;
+    void setup() {       
+      cb = new ConfigurationBuilder();  
+      cb.setOAuthConsumerKey("");   
+      cb.setOAuthConsumerSecret("");   
+      cb.setOAuthAccessToken("");   
+      cb.setOAuthAccessTokenSecret("");
+}

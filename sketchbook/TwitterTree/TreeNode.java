@@ -1,15 +1,21 @@
+import twitter4j.conf.*; 
+import twitter4j.api.*; 
+import twitter4j.*; 
 /*****************************************************
  * class TreeNode
  * Implements a node for use in a binary tree.
- * Only holds int cargo.
+ * holds Status cargo.
  *****************************************************/
 
 public class TreeNode
 {
 
   //instance variables / attributes of a TreeNode:
-  int _cargo;        //this node's data
-  TreeNode _lt, _rt; //pointers to left, right subtrees
+  Status _cargo;        //this node's data
+  TreeNode left, right; //poStatusers to left, right subtrees
+  int rt;
+  int followers;
+  int x,y;
 
 
   /*****************************************************
@@ -17,7 +23,7 @@ public class TreeNode
    * Construct a tree node with specified value, 
    * with null left and right subtrees.
    *****************************************************/
-  TreeNode( int initValue )
+  TreeNode( Status initValue )
   {
     _cargo = initValue;
   }
@@ -27,11 +33,11 @@ public class TreeNode
    * overloaded constructor
    * Construct tree node w specified value, left, and right subtrees.
    *****************************************************/
-  TreeNode( int initValue, TreeNode initLeft, TreeNode initRight ) 
+  TreeNode( Status initValue, TreeNode initLeft, TreeNode initRight ) 
   {
     this(initValue);
-    _lt = initLeft;
-    _rt = initRight;
+    left = initLeft;
+    right = initRight;
   }
  
 
@@ -40,7 +46,7 @@ public class TreeNode
    *****************************************************/
   TreeNode getLeft() 
   {
-    return _lt;
+    return left;
   }
 
 
@@ -49,25 +55,34 @@ public class TreeNode
    *****************************************************/
   TreeNode getRight() 
   {
-    return _rt;
+    return right;
   }
 
 
   /*****************************************************
    * Returns the value stored in this tree node.
    *****************************************************/
-  int getValue() 
+  Status getStatus() 
   {
     return _cargo;
   }
-
+  
+  /*****************************************************
+   * Returns the number of followers of the Status 
+   stored in this tree node.
+   *****************************************************/
+  int getRT()
+  {
+    return _cargo.getRetweetCount();
+  }
+  
 
   /*****************************************************
    * Sets the value of the left subtree of this node.
    *****************************************************/
   void setLeft( TreeNode theNewLeft ) 
   {
-    _lt = theNewLeft;
+    left = theNewLeft;
   }
 
 
@@ -76,16 +91,17 @@ public class TreeNode
    *****************************************************/
   void setRight( TreeNode theNewRight ) 
   {
-    _rt = theNewRight;
+    right = theNewRight;
   }
 
 
   /*****************************************************
    * Sets the value of this tree node.
    *****************************************************/
-  void setValue( int theNewValue ) 
+  void setValue( Status theNewValue ) 
   {
     _cargo = theNewValue;
   }
+  
  
 }//end class

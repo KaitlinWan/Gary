@@ -42,4 +42,5 @@ Fixed Proposal
 ===============================================================
 6/2/18
 Began work on UI (search function, retrieve and display tweets)
+Worked on creating data structure catered towards tweets
 : Eric Wong

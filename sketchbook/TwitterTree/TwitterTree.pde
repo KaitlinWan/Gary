@@ -8,7 +8,7 @@ ConfigurationBuilder cb;
 Query query; 
 Twitter twitter;
 boolean askQ = true;
-boolean show = false;
+boolean show = true;
 String words = "";
 char letter;
 
@@ -62,7 +62,7 @@ void keyTyped() {
 }
 void mouseClicked() {
   if(!askQ) {
-    show = true;
+    show = !show;
   }
 }
 
@@ -73,7 +73,7 @@ void queryTwitter() {
     QueryResult result = twitter.search(query);     
     Tree tweets = new Tree();
     tweets.insert(result.getTweets().get(0));
-    text((result.getTweets().get(0).getText()), 50, 70.0);
+    text((result.getTweets().get((int)random(0,5)).getText()), 50, 70.0);
   }
   catch (TwitterException te) {     
     println("Couldn''t connect: " + te);

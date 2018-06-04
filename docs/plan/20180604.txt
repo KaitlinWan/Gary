@@ -1,0 +1,23 @@
+Gary - Eric Wong, Josh Weiner, Kaitlin Wan
+2018-06-04
+
+Crucial Jobs
+- overcome rate limiting by figuring a way to limit the number of requests our app makes to Twiter, since we can only make 180 requests every 15 minutes
+- finish the data structure in which to hold tweets
+  - create methods add and remove from structure
+  - make structure always maintain sortedness (for # of followers, # of RTs, and proximity)
+- create a working version as soon as possible
+
+Core Functionality
+- priority in retreiving tweets and adding to data structure
+  - must have data structure completed first
+- have at least one sort method completed first, so that we have a working version
+- work on data structure and solving rate limiting as a priority
+- visual components, such as "animated" trees, etc are to be done AFTER we achieve basic workability in retrieving tweets and sorting them in a tree
+
+Tasks
+All: complete overarching data structure to contain our tweets (binary tree)
+   - work on UI (presentation of data as a tree; should be done after)
+Eric: work on methods for sorting by # of retweets
+Kaitlin: work on methods for sorting by tweeters's followers
+Josh: work on methods for sorting by proximity + overcoming rate limiting (limit the # of requests we make)

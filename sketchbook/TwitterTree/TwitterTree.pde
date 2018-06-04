@@ -4,13 +4,14 @@ import twitter4j.*;
 import java.util.*; 
 
 PFont font;
-ConfigurationBuilder cb; 
-Query query; 
-Twitter twitter;
 boolean askQ = true;
 boolean show = true;
 String words = "";
 char letter;
+Tree tweets;
+ConfigurationBuilder cb; 
+Query query; 
+Twitter twitter;
 
 void setup() {    
   cb = new ConfigurationBuilder();      //Acreditacion
@@ -19,7 +20,8 @@ void setup() {
   cb.setOAuthAccessToken("1000527653252804608-BHvNG8yI7gdKphTAfyGGk79AXEXDVR");   
   cb.setOAuthAccessTokenSecret("SRUatIDTe2Z1c8Syov3jQepZKDGrZq0GjWVspUJS4nFoV");
   
-  twitter = new TwitterFactory(cb.build()).getInstance();    
+  twitter = new TwitterFactory(cb.build()).getInstance();
+  tweets = new Tree();
   
   size(600, 600);
   background(255);
@@ -66,12 +68,23 @@ void mouseClicked() {
   }
 }
 
+void addToTree() {
+  query = new Query(words);
+  query.setCount(1);
+    try {     
+    QueryResult result = twitter.search(query);     
+    tweets.insert(result.getTweets().get(0));
+  }
+  catch (TwitterException te) {     
+    println("Couldn''t connect: " + te);
+  }
+}
+
 void queryTwitter() {   
   query = new Query(words);   
   query.setCount(1);   
   try {     
     QueryResult result = twitter.search(query);     
-    Tree tweets = new Tree();
     tweets.insert(result.getTweets().get(0));
     text((result.getTweets().get((int)random(0,5)).getText()), 50, 70.0);
   }

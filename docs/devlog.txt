@@ -44,3 +44,7 @@ Fixed Proposal
 Began work on UI (search function, retrieve and display tweets)
 Worked on creating data structure catered towards tweets
 : Eric Wong
+Worked on class for Tweets, and associated fields and methods to store data from tweets.
+Worked on overarching class and added fields for: data to order by, method of display, and sorting algorithm.
+Worked on retrieving specific pieces of data from tweets generated in queries.
+: Joshua Weiner

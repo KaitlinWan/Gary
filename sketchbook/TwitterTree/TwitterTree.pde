@@ -5,7 +5,7 @@ import java.util.*;
 
 PFont font;
 boolean askQ = true;
-boolean show = true;
+boolean show = false;
 String words = "";
 char letter;
 Tree tweets;
@@ -40,7 +40,7 @@ void draw() {
     textSize(25);
     text("Welcome to a tree!",50,50);
     if (show) {
-      queryTwitter();
+      prompt("this is show");
     }
   }
 }
@@ -53,7 +53,7 @@ void keyTyped() {
     letter = key;
     words = words + key;
     // Write the letter to the console
-    println(key);
+    //println(key);
   }
   else if((key == BACKSPACE) && words.length() > 0){
     words = words.substring(0, words.length()-1);
@@ -102,5 +102,5 @@ void prompt(String q) {
   //text("The String is " + words.length() +  " characters long", 50, 90);
   
   textSize(36);
-  text("#" + words, 50, 60, 500, 300);
+  text(words, 50, 60, 500, 300);
 }

@@ -6,6 +6,7 @@ import java.util.*;
 PFont font;
 boolean askQ = true;
 boolean show = false;
+boolean canSearch = true;
 String words = "";
 char letter;
 Tree tweets;
@@ -49,17 +50,23 @@ void draw() {
 void keyTyped() {
   // The variable "key" always contains the value 
   // of the most recent key pressed.
-  if ((key >= 'A' && key <= 'z') || key == ' ') {
-    letter = key;
-    words = words + key;
-    // Write the letter to the console
-    //println(key);
-  }
-  else if((key == BACKSPACE) && words.length() > 0){
-    words = words.substring(0, words.length()-1);
-  }
-  else if(key == ENTER) {
-    askQ = false;
+  String q = "";
+  if (canSearch) {
+    if ((key >= 'A' && key <= 'z') || key == ' ') {
+      letter = key;
+      words = words + key;
+      // Write the letter to the console
+      //println(key);
+    }
+    else if((key == BACKSPACE) && words.length() > 0){
+      words = words.substring(0, words.length()-1);
+    }
+    else if(key == ENTER) {
+      q = words;
+      askQ = false;
+      queryTwitter(q);
+      canSearch = false;
+    }
   }
 }
 void mouseClicked() {
@@ -68,29 +75,23 @@ void mouseClicked() {
   }
 }
 
-void addToTree() {
-  query = new Query(words);
-  query.setCount(1);
-    try {     
-    QueryResult result = twitter.search(query);     
-    tweets.insert(result.getTweets().get(0));
-  }
-  catch (TwitterException te) {     
-    println("Couldn''t connect: " + te);
-  }
-}
-
-void queryTwitter() {   
-  query = new Query(words);   
-  query.setCount(1);   
+void queryTwitter(String search) { 
+  System.out.println(search);
+  /*query = new Query(search);   
+  query.setCount(10);   
   try {     
     QueryResult result = twitter.search(query);     
-    tweets.insert(result.getTweets().get(0));
-    text((result.getTweets().get((int)random(0,5)).getText()), 50, 70.0);
-  }
+    List<Status> tweets = result.getTweets();     
+    println("New Tweet : ");     
+    for (Status tw : tweets) {       
+      String msg = tw.getText();       
+      println("tweet : " + msg);
+    }
+  }   
   catch (TwitterException te) {     
     println("Couldn''t connect: " + te);
   }
+  */
 }
 
 void prompt(String q) {

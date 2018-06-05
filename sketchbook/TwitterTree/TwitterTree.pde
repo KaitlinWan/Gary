@@ -3,12 +3,31 @@ import twitter4j.api.*;
 import twitter4j.*; 
 import java.util.*; 
 
+ArrayList<Button> buttons = new ArrayList<Button>();
+
 PFont font;
 boolean askQ = true;
 boolean show = false;
 boolean canSearch = true;
 String words = "";
 char letter;
+
+/*The following is a variable that indicates the sort method:
+* 1 = quicksort
+* 2 = mergesort
+* 3 = insertion sort
+*/
+int sort;
+
+/*The following is a variable that indicates the data structure type:
+* 1 = quicksort
+* 2 = mergesort
+* 3 = insertion sort
+*/
+int struct;
+
+List<Status> currList = new List<Status>();
+int index = currList.size();
 Tree tweets;
 ConfigurationBuilder cb; 
 Query query; 
@@ -25,32 +44,52 @@ void setup() {
   tweets = new Tree();
   
   size(displayWidth, displayHeight);
-  background(255);
+  background(color(18, 22, 33));
 
   font = createFont("Arial",22);
   textFont(font);
 
+  /* Initialize buttons which enable user interaction */
+  Button searchAgain = new Button(width - 360, height - 90, 200, 50, "Search Again");
+  buttons.add(searchAgain);
+  Button sort = new Button(width - 360, height - 160, 200, 50, "Sort");
+  buttons.add(sort);
+  Button insertionSort = new Button(width - 480, height - 370, 200, 50, "Insertion Sort");
+  Button mergeSort = new Button(width - 480, height - 300, 200, 50, "Merge Sort");
+  Button quickSort = new Button(width - 480, height - 230, 200, 50, "Quick Sort");
+  Button minHeap = new Button(width - 240, height - 230, 200, 50, "Min Heap");
+  Button maxHeap = new Button(width - 240, height - 300, 200, 50, "Max Heap");
+  Button binaryTree = new Button(width - 240, height - 370, 200, 50, "Binary Tree");
+  buttons.add(insertionSort);
+  buttons.add(mergeSort);
+  buttons.add(quickSort);
+  buttons.add(minHeap);
+  buttons.add(maxHeap);
+  buttons.add(binaryTree);
+
   
+
 }
 
 void draw() {
   prompt("hello, please enter your search query below");
   //background(255);
   if (!askQ) {
-    
-    List<Button> buttons = new List<Button>();
-
-    update(mouseX, mouseY);
-    
-    
-    background(0);
+    background(color(18, 22, 33));
     textSize(25);
     text("Welcome to a tree!",50,50);
     if (show) {
       prompt("this is show");
     }
     
-    buttons.add(searchAgain = new Button(width - 120, height - 80, 80, 40, "Search Again")); 
+    for (Button b : buttons) {
+      b.update();
+      
+    }
+    update(mouseX, mouseY, buttons);
+    update(currList, index);
+    index ++;
+
   }
   //else {
    // Status in 
@@ -85,18 +124,44 @@ void mouseClicked() {
   }
 }
 
-void update(int x, int y) {
-  
+void update(int x, int y, ArrayList<Button> buttons) {
+  for (int i = 0; i < buttons.size(); i ++) {
+    
+    if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
+      buttons.get(i).col = 100;
+      if (mousePressed) {
+        if (buttons.get(i).text == "Search Again") {
+          askQ = true;
+          canSearch = true;
+          words = "";
+        }
+      }
+    }
+    else
+      buttons.get(i).col = 175;
+  }
+}
+
+void update(List<Status> tweets, int index) {
+  stroke(255);
+  fill(0);
+  rect(width - 480, 5, 440, 300);
+  for (int i = 5; i < 300; i += 15) {
+    fill(255);
+    textSize(10);
+    String text = tweets.get(index).getText();
+    text(text, width - 460, i, 420, 290);
+    index ++;
+  }
 }
 
 void queryTwitter(String search) { 
   System.out.println(search);
   query = new Query(search);   
-  query.setCount(100);   
   try {     
     QueryResult result = twitter.search(query);     
     List<Status> tweets = result.getTweets();     
-    println("New Tweet : ");     
+    currList = tweets;     
     for (Status tw : tweets) {       
       String msg = tw.getText();       
       println("tweet : " + msg);
@@ -110,7 +175,7 @@ void queryTwitter(String search) {
 }
 
 void prompt(String q) {
-   background(0); // Set background to black
+  background(color(18, 22, 33)); // Set background to black
   
   textSize(14);
   text(q, 50, 50);
@@ -119,4 +184,8 @@ void prompt(String q) {
   
   textSize(36);
   text(words, 50, 60, 500, 300);
+  
+  if (!askQ) {
+    
+  }
 }

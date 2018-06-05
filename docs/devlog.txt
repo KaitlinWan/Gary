@@ -48,3 +48,12 @@ Worked on class for Tweets, and associated fields and methods to store data from
 Worked on overarching class and added fields for: data to order by, method of display, and sorting algorithm.
 Worked on retrieving specific pieces of data from tweets generated in queries.
 : Joshua Weiner
+===============================================================
+6/4/18
+Worked on display of tweets and tweet data
+: Joshua Weiner
+===============================================================
+6/5/18
+Created buttons to enable user to organize data and go back to home screen to issue new queries
+Worked further on display of tweets
+: Joshua Weiner

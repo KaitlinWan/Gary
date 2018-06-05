@@ -57,3 +57,5 @@ Worked on display of tweets and tweet data
 Created buttons to enable user to organize data and go back to home screen to issue new queries
 Worked further on display of tweets
 : Joshua Weiner
+Added to button functionality, allowing them to change the type of structure and sort method
+: Eric Wong

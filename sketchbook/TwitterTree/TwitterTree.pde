@@ -24,7 +24,7 @@ void setup() {
   twitter = new TwitterFactory(cb.build()).getInstance();
   tweets = new Tree();
   
-  size(600, 600);
+  size(displayWidth, displayHeight);
   background(255);
 
   font = createFont("Arial",22);
@@ -37,12 +37,20 @@ void draw() {
   prompt("hello, please enter your search query below");
   //background(255);
   if (!askQ) {
+    
+    List<Button> buttons = new List<Button>();
+
+    update(mouseX, mouseY);
+    
+    
     background(0);
     textSize(25);
     text("Welcome to a tree!",50,50);
     if (show) {
       prompt("this is show");
     }
+    
+    buttons.add(searchAgain = new Button(width - 120, height - 80, 80, 40, "Search Again")); 
   }
   //else {
    // Status in 
@@ -77,6 +85,10 @@ void mouseClicked() {
   }
 }
 
+void update(int x, int y) {
+  
+}
+
 void queryTwitter(String search) { 
   System.out.println(search);
   query = new Query(search);   
@@ -89,9 +101,11 @@ void queryTwitter(String search) {
       String msg = tw.getText();       
       println("tweet : " + msg);
     }
+    canSearch = false;
   }   
   catch (TwitterException te) {     
     println("Couldn''t connect: " + te);
+    
   }
 }
 

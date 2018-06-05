@@ -26,12 +26,16 @@ int sort;
 */
 int struct;
 
-List<Status> currList = new List<Status>();
-int index = currList.size();
+ArrayList<Status> currList = new ArrayList<Status>();
+int index = 0;
+int xDist = width - 20;
+String tweetText;
+
 Tree tweets;
 ConfigurationBuilder cb; 
 Query query; 
 Twitter twitter;
+
 
 void setup() {    
   cb = new ConfigurationBuilder();      //Acreditacion
@@ -77,7 +81,8 @@ void draw() {
   if (!askQ) {
     background(color(18, 22, 33));
     textSize(25);
-    text("Welcome to a tree!",50,50);
+    fill(255);
+    text("Welcome to a tree!",50,70);
     if (show) {
       prompt("this is show");
     }
@@ -87,14 +92,32 @@ void draw() {
       
     }
     update(mouseX, mouseY, buttons);
-    update(currList, index);
-    index ++;
+    
+    if (currList.size() != 0) {
+    noStroke();
+    fill(255);
+    rect(15, 15, width - 20, 30, 5);
+    fill(0);
+    textSize(15);
+    tweetText = currList.get(index).getText();
+    text(tweetText, xDist, 20, width, 30); 
 
+    // Decrement x
+    xDist = xDist - 2;
+
+    // If x is less than the negative width, then it is off the screen
+    // textWidth() is used to calculate the width of the current String.
+    float w = textWidth(tweetText); 
+    if (xDist < -w) {
+      xDist = width;
+      // index is incremented when the current String has left the screen in order to display a new String.
+      index = (index + 1) % currList.size();
+    }
+    }
   }
   //else {
-   // Status in 
-}
-
+   // Status in
+  }
 
 void keyTyped() {
   // The variable "key" always contains the value 
@@ -134,6 +157,8 @@ void update(int x, int y, ArrayList<Button> buttons) {
           askQ = true;
           canSearch = true;
           words = "";
+          currList = new ArrayList<Status>(0);
+          index = 0;
         }
       }
     }
@@ -142,29 +167,15 @@ void update(int x, int y, ArrayList<Button> buttons) {
   }
 }
 
-void update(List<Status> tweets, int index) {
-  stroke(255);
-  fill(0);
-  rect(width - 480, 5, 440, 300);
-  for (int i = 5; i < 300; i += 15) {
-    fill(255);
-    textSize(10);
-    String text = tweets.get(index).getText();
-    text(text, width - 460, i, 420, 290);
-    index ++;
-  }
-}
-
 void queryTwitter(String search) { 
   System.out.println(search);
-  query = new Query(search);   
+  query = new Query(search);
+  query.setCount(100);
   try {     
     QueryResult result = twitter.search(query);     
     List<Status> tweets = result.getTweets();     
-    currList = tweets;     
-    for (Status tw : tweets) {       
-      String msg = tw.getText();       
-      println("tweet : " + msg);
+    for (Status tw : tweets) {  
+      currList.add(tw);
     }
     canSearch = false;
   }   

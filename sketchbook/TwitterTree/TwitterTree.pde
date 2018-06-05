@@ -17,12 +17,12 @@ char letter;
 * 2 = mergesort
 * 3 = insertion sort
 */
-int sort;
+int sort = 0;
 
 /*The following is a variable that indicates the data structure type:
-* 1 = quicksort
-* 2 = mergesort
-* 3 = insertion sort
+* 1 = minHeap
+* 2 = maxHeap
+* 3 = binary tree
 */
 int struct;
 
@@ -83,6 +83,12 @@ void draw() {
     textSize(25);
     fill(255);
     text("Welcome to a tree!",50,70);
+    if (sort > 0) {
+      String type = "Type of sort: " + sort;
+      type += "\n" + "Type of structure: " + struct;
+      
+      text(type, 25, height - 500);
+    }
     if (show) {
       prompt("this is show");
     }
@@ -142,9 +148,6 @@ void keyTyped() {
   }
 }
 void mouseClicked() {
-  if(!askQ) {
-    show = !show;
-  }
 }
 
 void update(int x, int y, ArrayList<Button> buttons) {
@@ -153,7 +156,25 @@ void update(int x, int y, ArrayList<Button> buttons) {
     if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
       buttons.get(i).col = 100;
       if (mousePressed) {
-        if (buttons.get(i).text == "Search Again") {
+        if (buttons.get(i).text == "Insertion Sort") {
+          sort = 3; 
+        }
+        else if (buttons.get(i).text == "Merge Sort") {
+          sort = 2; 
+        }
+        else if (buttons.get(i).text == "Quick Sort") {
+          sort = 1; 
+        }
+        else if (buttons.get(i).text == "Min Heap") {
+          struct = 1; 
+        }
+        else if (buttons.get(i).text == "Max Heap") {
+          struct = 2; 
+        }
+        else if (buttons.get(i).text == "Binary Tree") {
+          struct = 3; 
+        }
+        else if (buttons.get(i).text == "Search Again") {
           askQ = true;
           canSearch = true;
           words = "";

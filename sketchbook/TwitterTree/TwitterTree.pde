@@ -44,6 +44,8 @@ void draw() {
       prompt("this is show");
     }
   }
+  //else {
+   // Status in 
 }
 
 
@@ -77,8 +79,8 @@ void mouseClicked() {
 
 void queryTwitter(String search) { 
   System.out.println(search);
-  /*query = new Query(search);   
-  query.setCount(10);   
+  query = new Query(search);   
+  query.setCount(100);   
   try {     
     QueryResult result = twitter.search(query);     
     List<Status> tweets = result.getTweets();     
@@ -91,7 +93,6 @@ void queryTwitter(String search) {
   catch (TwitterException te) {     
     println("Couldn''t connect: " + te);
   }
-  */
 }
 
 void prompt(String q) {

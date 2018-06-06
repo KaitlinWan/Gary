@@ -47,7 +47,7 @@ void setup() {
   twitter = new TwitterFactory(cb.build()).getInstance();
   tweets = new Tree();
   
-  size(1024, 768);
+  size(displayWidth, displayHeight);
   background(color(18, 22, 33));
 
   font = createFont("Arial",22);
@@ -83,8 +83,6 @@ void draw() {
     textSize(25);
     fill(255);
     text("Welcome to a tree!",50,70);
-    text("View tweets above",50,100);
-    
     if (sort > 0 || struct > 0) {
       String type = "Type of sort: ";
       if (sort == 1)
@@ -92,9 +90,8 @@ void draw() {
       else if (sort == 2)
         type += "Merge Sort";
       else if (sort == 3)
-        type += "Retweets";
+        type += "Quick Sort";
       type += "\n" + "Type of structure: ";
-      type += "\n" + "Type of Sort: Quick Sort ";
       if (struct == 1)
         type += "Binary Tree";
       else if (struct == 2)
@@ -171,13 +168,13 @@ void update(int x, int y, ArrayList<Button> buttons) {
     if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
       buttons.get(i).col = 100;
       if (mousePressed) {
-        if (buttons.get(i).text == "Retweets") {
+        if (buttons.get(i).text == "Insertion Sort") {
           sort = 3; 
         }
-        else if (buttons.get(i).text == "Followers") {
+        else if (buttons.get(i).text == "Merge Sort") {
           sort = 2; 
         }
-        else if (buttons.get(i).text == "Location") {
+        else if (buttons.get(i).text == "Quick Sort") {
           sort = 1; 
         }
         else if (buttons.get(i).text == "Min Heap") {
@@ -209,9 +206,8 @@ void queryTwitter(String search) {
   query.setCount(100);
   try {     
     QueryResult result = twitter.search(query);     
-    List<Status> listTweets = result.getTweets();
-    for (Status tw : listTweets) {
-      
+    List<Status> listTweets = result.getTweets();     
+    for (Status tw : listTweets) {  
       currList.add(tw);
     }
     canSearch = false;

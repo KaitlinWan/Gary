@@ -83,10 +83,21 @@ void draw() {
     textSize(25);
     fill(255);
     text("Welcome to a tree!",50,70);
-    if (sort > 0) {
-      String type = "Type of sort: " + sort;
-      type += "\n" + "Type of structure: " + struct;
-      
+    if (sort > 0 || struct > 0) {
+      String type = "Type of sort: ";
+      if (sort == 1)
+        type += "Insertion Sort";
+      else if (sort == 2)
+        type += "Merge Sort";
+      else if (sort == 3)
+        type += "Quick Sort";
+      type += "\n" + "Type of structure: ";
+      if (struct == 1)
+        type += "Binary Tree";
+      else if (struct == 2)
+        type += "Max Heap";
+      else if (struct == 3)
+        type += "Min Heap";
       text(type, 25, height - 500);
     }
     if (show) {
@@ -106,6 +117,7 @@ void draw() {
     fill(0);
     textSize(15);
     tweetText = currList.get(index).getText();
+    tweetText = tweetText.replace("\n", " ");
     text(tweetText, xDist, 20, width, 30); 
 
     // Decrement x
@@ -166,13 +178,13 @@ void update(int x, int y, ArrayList<Button> buttons) {
           sort = 1; 
         }
         else if (buttons.get(i).text == "Min Heap") {
-          struct = 1; 
+          struct = 3; 
         }
         else if (buttons.get(i).text == "Max Heap") {
           struct = 2; 
         }
         else if (buttons.get(i).text == "Binary Tree") {
-          struct = 3; 
+          struct = 1; 
         }
         else if (buttons.get(i).text == "Search Again") {
           askQ = true;

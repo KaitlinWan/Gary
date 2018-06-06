@@ -5,3 +5,6 @@
 
 <h1> How did we do this?</h1>
 <p> The visual component of this project is done through processing, and all the tweets are retrieved using a <a href = "http://twitter4j.org/en/index.html"> Java library </a> for the twitter api. The tweets are retrieved in real time, and are stored on a per-session basis in a structure that the user decides (heaps or binary tree). </p>
+
+<h1> How can you use this project?</h1>
+<p>It's simple! In our sketchbook directory, we included a folder called twitter4j401. This folder (and its contents) should be compied into the "libraries" folder of your Processing directory. That's it! We took care of all the hard work for you.<p>

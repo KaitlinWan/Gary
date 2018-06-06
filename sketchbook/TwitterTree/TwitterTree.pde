@@ -12,12 +12,12 @@ boolean canSearch = true;
 String words = "";
 char letter;
 
-/*The following is a variable that indicates the sort method:
+/*The following is a variable that indicates the sortBy method:
 * 1 = quicksort
 * 2 = mergesort
-* 3 = insertion sort
+* 3 = Retweets
 */
-int sort = 0;
+int sortBy = 0;
 
 /*The following is a variable that indicates the data structure type:
 * 1 = minHeap
@@ -83,14 +83,14 @@ void draw() {
     textSize(25);
     fill(255);
     text("Welcome to a tree!",50,70);
-    if (sort > 0 || struct > 0) {
+    if (sortBy > 0 || struct > 0) {
       String type = "Type of sort: ";
-      if (sort == 1)
-        type += "Insertion Sort";
-      else if (sort == 2)
-        type += "Merge Sort";
-      else if (sort == 3)
-        type += "Quick Sort";
+      if (sortBy == 1)
+        type += "Retweets";
+      else if (sortBy == 2)
+        type += "Followers";
+      else if (sortBy == 3)
+        type += "QLocation";
       type += "\n" + "Type of structure: ";
       if (struct == 1)
         type += "Binary Tree";
@@ -168,14 +168,14 @@ void update(int x, int y, ArrayList<Button> buttons) {
     if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
       buttons.get(i).col = 100;
       if (mousePressed) {
-        if (buttons.get(i).text == "Insertion Sort") {
-          sort = 3; 
+        if (buttons.get(i).text == "Retweets") {
+          sortBy = 1; 
         }
-        else if (buttons.get(i).text == "Merge Sort") {
-          sort = 2; 
+        else if (buttons.get(i).text == "Followers") {
+          sortBy = 2; 
         }
-        else if (buttons.get(i).text == "Quick Sort") {
-          sort = 1; 
+        else if (buttons.get(i).text == "QLocation") {
+          sortBy = 3; 
         }
         else if (buttons.get(i).text == "Min Heap") {
           struct = 3; 

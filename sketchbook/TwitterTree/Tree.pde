@@ -39,7 +39,27 @@ class Tree {
       return;
     }
   }//end insert()
-
+  
+ public void insertFollowers( TreeNode stRoot, TreeNode newNode )
+  {
+    int userFollowers = stRoot.getStatus().getUser().getFollowersCount();
+    int tweeterFollowers = newNode.getStatus().getUser().getFollowersCount();
+    if ( tweeterFollowers < userFollowers) {
+      //if no left child, make newNode the left child
+      if ( stRoot.getLeft() == null )
+        stRoot.setLeft( newNode );
+      else //recurse down left subtree
+      insertRT( stRoot.getLeft(), newNode );
+      return;
+    } else { // new val >= curr, so look down right subtree
+      //if no right child, make newNode the right child
+      if ( stRoot.getRight() == null )
+        stRoot.setRight(newNode);
+      else //recurse down right subtree
+      insertRT( stRoot.getRight(), newNode );
+      return;
+    }
+  }//end insert()
   public void process() {
     Status retStat = _root.getStatus();
   }

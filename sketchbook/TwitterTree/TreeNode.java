@@ -48,6 +48,14 @@ public class TreeNode
   {
     return left;
   }
+  
+  int getLFollowers() {
+    return left.getStatus().getUser().getFollowersCount();
+  }
+  
+   int getRFollowers() {
+    return left.getStatus().getUser().getFollowersCount();
+  }
 
 
   /*****************************************************

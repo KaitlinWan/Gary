@@ -3,12 +3,15 @@ import twitter4j.api.*;
 import twitter4j.*; 
 import java.util.*;
 import java.util.ArrayList;
+
 class Tree {
   TreeNode _root;
 
   Tree() {
     _root = null;
+    //initializes a new tree with null root
   }
+  
   public void insert(Status newVal) {
     TreeNode newNode = new TreeNode(newVal);
     if ( _root == null ) {
@@ -17,6 +20,7 @@ class Tree {
     }
     insertRT( _root, newNode );
   }
+  
   public void insertRT( TreeNode stRoot, TreeNode newNode )
   {
     if ( newNode.getRT() < stRoot.getRT() ) {

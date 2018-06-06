@@ -58,15 +58,15 @@ void setup() {
   buttons.add(searchAgain);
   Button sort = new Button(width - 360, height - 160, 200, 50, "Sort");
   buttons.add(sort);
-  Button insertionSort = new Button(width - 480, height - 370, 200, 50, "Insertion Sort");
-  Button mergeSort = new Button(width - 480, height - 300, 200, 50, "Merge Sort");
-  Button quickSort = new Button(width - 480, height - 230, 200, 50, "Quick Sort");
+  Button retweets = new Button(width - 480, height - 370, 200, 50, "Retweets");
+  Button followers = new Button(width - 480, height - 300, 200, 50, "Followers");
+  Button location = new Button(width - 480, height - 230, 200, 50, "QLocation");
   Button minHeap = new Button(width - 240, height - 230, 200, 50, "Min Heap");
   Button maxHeap = new Button(width - 240, height - 300, 200, 50, "Max Heap");
   Button binaryTree = new Button(width - 240, height - 370, 200, 50, "Binary Tree");
-  buttons.add(insertionSort);
-  buttons.add(mergeSort);
-  buttons.add(quickSort);
+  buttons.add(retweets);
+  buttons.add(followers);
+  buttons.add(location);
   buttons.add(minHeap);
   buttons.add(maxHeap);
   buttons.add(binaryTree);
@@ -206,8 +206,8 @@ void queryTwitter(String search) {
   query.setCount(100);
   try {     
     QueryResult result = twitter.search(query);     
-    List<Status> tweets = result.getTweets();     
-    for (Status tw : tweets) {  
+    List<Status> listTweets = result.getTweets();     
+    for (Status tw : listTweets) {  
       currList.add(tw);
     }
     canSearch = false;
@@ -228,8 +228,6 @@ void prompt(String q) {
   
   textSize(36);
   text(words, 50, 60, 500, 300);
-  
   if (!askQ) {
-    
   }
 }

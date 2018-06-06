@@ -12,13 +12,20 @@ class Tree {
     //initializes a new tree with null root
   }
   
-  public void insert(Status newVal) {
+  public void insert(Status newVal, int type) {
     TreeNode newNode = new TreeNode(newVal);
     if ( _root == null ) {
       _root = newNode;
       return;
     }
+    if(type == 0){
     insertRT( _root, newNode );
+    }
+    else if(type == 1){
+      
+    }
+    else{
+    }
   }
   
   public void insertRT( TreeNode stRoot, TreeNode newNode )

@@ -44,9 +44,9 @@ class Tree {
   
  public void insertFollowers( TreeNode stRoot, TreeNode newNode )
   {
-    int userFollowers = stRoot.getStatus().getUser().getFollowersCount();
-    int tweeterFollowers = newNode.getStatus().getUser().getFollowersCount();
-    if ( tweeterFollowers < userFollowers) {
+    int rootFollowers = stRoot.getStatus().getUser().getFollowersCount();
+    int newFollowers = newNode.getStatus().getUser().getFollowersCount();
+    if ( rootFollowers < newFollowers) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null )
         stRoot.setLeft( newNode );
@@ -63,11 +63,17 @@ class Tree {
     }
   }//end insert()
   
+  public void traverse() {
+    traverse(_root);
+    //println(order.size());
+  }
+  
     public void traverse( TreeNode currNode )
   {
     if ( currNode == null ) //stepped beyond leaf
       return;
-    order.add(currNode.getStatus());
+    //println(currNode.getStatus().getUser().getFollowersCount());
+    order.add(0,currNode.getStatus());
     traverse( currNode.getLeft() );
     traverse( currNode.getRight() );
   }

@@ -26,6 +26,7 @@ public class TreeNode
   TreeNode( Status initValue )
   {
     _cargo = initValue;
+    followers = _cargo.getUser().getFollowersCount();
   }
           
 

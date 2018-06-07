@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 class Tree {
   TreeNode _root;
-
+  ArrayList<Status> order = new ArrayList<Status>();
+  
+  
   Tree() {
     _root = null;
     //initializes a new tree with null root
@@ -60,6 +62,21 @@ class Tree {
       return;
     }
   }//end insert()
+  
+    public void traverse( TreeNode currNode )
+  {
+    if ( currNode == null ) //stepped beyond leaf
+      return;
+    order.add(currNode.getStatus());
+    traverse( currNode.getLeft() );
+    traverse( currNode.getRight() );
+  }
+  
+  public ArrayList getOrder() {
+    return order;
+  }
+  
+  
   public void process() {
     Status retStat = _root.getStatus();
   }

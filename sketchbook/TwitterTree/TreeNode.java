@@ -13,9 +13,9 @@ public class TreeNode
   //instance variables / attributes of a TreeNode:
   Status _cargo;        //this node's data
   TreeNode left, right; //poStatusers to left, right subtrees
-  int rt;
-  int followers;
-  int x,y;
+  int rt; //stores retweets
+  int followers; //stores followers of tweeter  
+  int x,y; //stores coordinates
 
 
   /*****************************************************

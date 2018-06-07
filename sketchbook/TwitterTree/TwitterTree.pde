@@ -9,13 +9,14 @@ PFont font;
 boolean askQ = true;
 boolean show = false;
 boolean canSearch = true;
+boolean sorted = false;
 String words = "";
 char letter;
 
 /*The following is a variable that indicates the sortBy method:
-* 1 = quicksort
-* 2 = mergesort
-* 3 = Retweets
+* 1 = retweets
+* 2 = followers
+* 3 = location
 */
 int sortBy = 0;
 
@@ -27,6 +28,7 @@ int sortBy = 0;
 int struct;
 
 ArrayList<Status> currList = new ArrayList<Status>();
+ArrayList<Status> sortedTweets = new ArrayList<Status>();
 int index = 0;
 int xDist = width - 20;
 String tweetText;
@@ -47,7 +49,7 @@ void setup() {
   twitter = new TwitterFactory(cb.build()).getInstance();
   tweets = new Tree();
   
-  size(displayWidth, displayHeight);
+  size(1024, 768);
   background(color(18, 22, 33));
 
   font = createFont("Arial",22);
@@ -90,7 +92,7 @@ void draw() {
       else if (sortBy == 2)
         type += "Followers";
       else if (sortBy == 3)
-        type += "QLocation";
+        type += "Location";
       type += "\n" + "Type of structure: ";
       if (struct == 1)
         type += "Binary Tree";
@@ -164,7 +166,7 @@ void mouseClicked() {
 
 void update(int x, int y, ArrayList<Button> buttons) {
   for (int i = 0; i < buttons.size(); i ++) {
-    
+  
     if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
       buttons.get(i).col = 100;
       if (mousePressed) {
@@ -186,9 +188,13 @@ void update(int x, int y, ArrayList<Button> buttons) {
         else if (buttons.get(i).text == "Binary Tree") {
           struct = 1; 
         }
+        else if(buttons.get(i).text == "Sort") {
+          sort();
+        }
         else if (buttons.get(i).text == "Search Again") {
           askQ = true;
           canSearch = true;
+          sorted = false;
           words = "";
           currList = new ArrayList<Status>(0);
           index = 0;
@@ -218,6 +224,16 @@ void queryTwitter(String search) {
   }
 }
 
+void sort() {
+  for (Status tweet: currList) {
+    tweets.insert(tweet);
+    tweets.traverse(tweets._root);
+    sortedTweets = tweets.getOrder();
+    sorted = true;
+  }
+}
+  
+
 void prompt(String q) {
   background(color(18, 22, 33)); // Set background to black
   
@@ -228,6 +244,5 @@ void prompt(String q) {
   
   textSize(36);
   text(words, 50, 60, 500, 300);
-  if (!askQ) {
-  }
+//currlist to tree, depending on method selected
 }

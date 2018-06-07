@@ -73,7 +73,7 @@ class Tree {
     if ( currNode == null ) //stepped beyond leaf
       return;
     //println(currNode.getStatus().getUser().getFollowersCount());
-    order.add(0,currNode.getStatus());
+    order.add(currNode.getStatus());
     traverse( currNode.getLeft() );
     traverse( currNode.getRight() );
   }

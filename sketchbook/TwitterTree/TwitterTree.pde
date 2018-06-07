@@ -166,36 +166,36 @@ void keyTyped() {
 
 void mouseClicked() {
   for (int i = 0; i < buttons.size(); i ++) {
-  if (mouseX >= buttons.get(i).xcor && mouseX <= (buttons.get(i).xcor + buttons.get(i).wd) && mouseY >= buttons.get(i).ycor && mouseY <= (buttons.get(i).ycor + buttons.get(i).ht)) {
-    if (buttons.get(i).text == "Retweets") {
-      sortBy = 1;
-    } else if (buttons.get(i).text == "Followers") {
-      sortBy = 2;
-    } else if (buttons.get(i).text == "QLocation") {
-      sortBy = 3;
-    } else if (buttons.get(i).text == "Min Heap") {
-      struct = 3;
-    } else if (buttons.get(i).text == "Max Heap") {
-      struct = 2;
-    } else if (buttons.get(i).text == "Binary Tree") {
-      struct = 1;
-    } else if (buttons.get(i).text == "Sort") {
-      sort();
-      /*
+    if (mouseX >= buttons.get(i).xcor && mouseX <= (buttons.get(i).xcor + buttons.get(i).wd) && mouseY >= buttons.get(i).ycor && mouseY <= (buttons.get(i).ycor + buttons.get(i).ht)) {
+      if (buttons.get(i).text == "Retweets") {
+        sortBy = 1;
+      } else if (buttons.get(i).text == "Followers") {
+        sortBy = 2;
+      } else if (buttons.get(i).text == "QLocation") {
+        sortBy = 3;
+      } else if (buttons.get(i).text == "Min Heap") {
+        struct = 3;
+      } else if (buttons.get(i).text == "Max Heap") {
+        struct = 2;
+      } else if (buttons.get(i).text == "Binary Tree") {
+        struct = 1;
+      } else if (buttons.get(i).text == "Sort") {
+        sort();
+        /*
           for (Status s: sortedTweets) {
-       println(s.getUser().getFollowersCount());
-       }
-       */
-    } else if (buttons.get(i).text == "Search Again") {
-      askQ = true;
-      canSearch = true;
-      sorted = false;
-      words = "";
-      currList = new ArrayList<Status>(0);
-      index = 0;
+         println(s.getUser().getFollowersCount());
+         }
+         */
+      } else if (buttons.get(i).text == "Search Again") {
+        askQ = true;
+        canSearch = true;
+        sorted = false;
+        words = "";
+        currList = new ArrayList<Status>(0);
+        index = 0;
+      }
     }
   }
-}
 }
 
 
@@ -204,36 +204,6 @@ void update(int x, int y, ArrayList<Button> buttons) {
 
     if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
       buttons.get(i).col = 100;
-      /*
-      if (mousePressed) {
-        if (buttons.get(i).text == "Retweets") {
-          sortBy = 1;
-        } else if (buttons.get(i).text == "Followers") {
-          sortBy = 2;
-        } else if (buttons.get(i).text == "QLocation") {
-          sortBy = 3;
-        } else if (buttons.get(i).text == "Min Heap") {
-          struct = 3;
-        } else if (buttons.get(i).text == "Max Heap") {
-          struct = 2;
-        } else if (buttons.get(i).text == "Binary Tree") {
-          struct = 1;
-        } else if (buttons.get(i).text == "Sort") {
-          sort();
-          /*
-          for (Status s: sortedTweets) {
-           println(s.getUser().getFollowersCount());
-           }
-           
-        } else if (buttons.get(i).text == "Search Again") {
-          askQ = true;
-          canSearch = true;
-          sorted = false;
-          words = "";
-          currList = new ArrayList<Status>(0);
-          index = 0;
-        }
-      }*/
     } else
       buttons.get(i).col = 175;
   }
@@ -261,21 +231,14 @@ void sort() {
   for (Status tweet : currList)
   {
     tweets.insert(tweet);
-    println("New Tweet: " + tweet.getText());
-    tweets.traverse();
-    sortedTweets = tweets.getOrder();
-    sorted = true;
   }
-}
-
-boolean statusPresent(ArrayList<Status> a, long id) {
-  //retVal = true;
-  for (Status s : a) {
-    if (s.getId() == id) {
-      return true;
-    }
+  //println("New Tweet: " + tweet.getText());
+  tweets.traverse();
+  sortedTweets = tweets.getOrder();
+  sorted = true;
+  for (Status s : sortedTweets) {
+    println(s.getRetweetCount());
   }
-  return false;
 }
 
 

@@ -26,13 +26,14 @@ int sortBy = 0;
  * 2 = maxHeap
  * 3 = binary tree
  */
-int struct;
+int struct = 0;
 
 ArrayList<Status> currList = new ArrayList<Status>();
 ArrayList<Status> sortedTweets = new ArrayList<Status>();
 int index = 0;
 int xDist = width - 20;
 String tweetText;
+
 
 Tree tweets;
 ConfigurationBuilder cb; 
@@ -83,39 +84,42 @@ void draw() {
     textSize(25);
     fill(255);
     text("Welcome to a tree!", 50, 70);
-    if (sortBy > 0 || struct > 0) {
-      String type = "Type of sort: ";
+    String info;
+    if (sortBy == 0 && struct == 0) {
+      info = "Please choose a sort method and a structure in which to display the sort";
+      text(info, 25, height - 500);
+    } 
+    else if (sortBy > 0 || struct > 0) {
+      info = "Type of sort: ";
       if (sortBy == 1)
-        type += "Retweets";
+        info += "Retweets";
       else if (sortBy == 2)
-        type += "Followers";
+        info += "Followers";
       else if (sortBy == 3)
-        type += "Location";
-      type += "\n" + "Type of structure: ";
+        info += "Location";
+      info += "\n" + "type of structure: ";
       if (struct == 1)
-        type += "Binary Tree";
+        info += "Binary Tree";
       else if (struct == 2)
-        type += "Max Heap";
+        info += "Max Heap";
       else if (struct == 3)
-        type += "Min Heap";
-      text(type, 25, height - 500);
+        info += "Min Heap";
+      text(info, 25, height - 500);
     }
     for (Button b : buttons) {
       b.update();
     }
+
     if (sorted == true) {
       background(color(18, 22, 33));
       buttons.get(0).update();
       /*
-      if (limit = true) {
        for(Status s: sortedTweets) {
        println(s.getUser().getFollowersCount());
        }
-       limit = false;
        }*/
     }
     update(mouseX, mouseY, buttons);
-
     if (currList.size() != 0) {
       noStroke();
       fill(255);
@@ -140,7 +144,6 @@ void draw() {
     }
   }
   //else {
-  // Status in
 }
 
 void keyTyped() {
@@ -167,6 +170,26 @@ void keyTyped() {
 void mouseClicked() {
   for (int i = 0; i < buttons.size(); i ++) {
     if (mouseX >= buttons.get(i).xcor && mouseX <= (buttons.get(i).xcor + buttons.get(i).wd) && mouseY >= buttons.get(i).ycor && mouseY <= (buttons.get(i).ycor + buttons.get(i).ht)) {
+      if (buttons.get(i).text == "Sort") {
+        if (sortBy > 0 || struct > 0) {
+          sort();
+        }
+        /*
+          for (Status s: sortedTweets) {
+         println(s.getUser().getFollowersCount());
+         }
+         */
+      }
+    }
+  }
+}
+
+
+void update(int x, int y, ArrayList<Button> buttons) {
+  for (int i = 0; i < buttons.size(); i ++) {
+    if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
+      buttons.get(i).col = 100; 
+    if (mousePressed) {
       if (buttons.get(i).text == "Retweets") {
         sortBy = 1;
       } else if (buttons.get(i).text == "Followers") {
@@ -179,13 +202,6 @@ void mouseClicked() {
         struct = 2;
       } else if (buttons.get(i).text == "Binary Tree") {
         struct = 1;
-      } else if (buttons.get(i).text == "Sort") {
-        sort();
-        /*
-          for (Status s: sortedTweets) {
-         println(s.getUser().getFollowersCount());
-         }
-         */
       } else if (buttons.get(i).text == "Search Again") {
         askQ = true;
         canSearch = true;
@@ -195,17 +211,10 @@ void mouseClicked() {
         index = 0;
       }
     }
-  }
-}
-
-
-void update(int x, int y, ArrayList<Button> buttons) {
-  for (int i = 0; i < buttons.size(); i ++) {
-
-    if (x >= buttons.get(i).xcor && x <= (buttons.get(i).xcor + buttons.get(i).wd) && y >= buttons.get(i).ycor && y <= (buttons.get(i).ycor + buttons.get(i).ht)) {
-      buttons.get(i).col = 100;
-    } else
+    }
+    else {
       buttons.get(i).col = 175;
+    }
   }
 }
 
@@ -230,7 +239,7 @@ void queryTwitter(String search) {
 void sort() {
   for (Status tweet : currList)
   {
-    tweets.insert(tweet);
+    tweets.insert(tweet, sortBy);
   }
   //println("New Tweet: " + tweet.getText());
   tweets.traverse();

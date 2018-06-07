@@ -14,13 +14,21 @@ class Tree {
     //initializes a new tree with null root
   }
   
-  public void insert(Status newVal) {
+  public void insert(Status newVal, int sortM) {
     TreeNode newNode = new TreeNode(newVal);
     if ( _root == null ) {
       _root = newNode;
       return;
     }
-    insertRT( _root, newNode );
+    if (sortM == 1) {
+      insertRT( _root, newNode );
+    }
+    else if(sortM == 2) {
+      insertF(_root,newNode);
+    }
+    else if(sortM == 3) {
+      //insertL(_root, newNode);
+    }
   }
   
   public void insertRT( TreeNode stRoot, TreeNode newNode )
@@ -42,7 +50,7 @@ class Tree {
     }
   }//end insert()
   
- public void insertFollowers( TreeNode stRoot, TreeNode newNode )
+ public void insertF( TreeNode stRoot, TreeNode newNode )
   {
     int rootFollowers = stRoot.getStatus().getUser().getFollowersCount();
     int newFollowers = newNode.getStatus().getUser().getFollowersCount();
@@ -51,14 +59,14 @@ class Tree {
       if ( stRoot.getLeft() == null )
         stRoot.setLeft( newNode );
       else //recurse down left subtree
-      insertRT( stRoot.getLeft(), newNode );
+      insertF( stRoot.getLeft(), newNode );
       return;
     } else { // new val >= curr, so look down right subtree
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null )
         stRoot.setRight(newNode);
       else //recurse down right subtree
-      insertRT( stRoot.getRight(), newNode );
+      insertF( stRoot.getRight(), newNode );
       return;
     }
   }//end insert()

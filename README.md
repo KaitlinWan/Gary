@@ -3,7 +3,7 @@ Josh Weiner, Eric Wong, Kaitlin Wan
 
 APCS2 Final Project - Tweetilize
 
-## Description of our Projcect.
+## Description of our Project.
 Have you ever wondered how different your life would be without the idea of news feeds and social media? Scrolling through unorganized, cluttered feeds can be a detrement to your life. Therefore, Team Gary has developed a new way to mitigate your aimless scrolling. With our processing based Twitter interface, you can discover a whole new experience. Our minimalistic approach to Twitter, you are capable of searching any topic. After searching, you are presented with a screen to select different ways of visualization. You can choose from sorting by followers, retweets, and location. As well as that, you are able to select the type of structure. When viewing, 
 
 ## Launch Instructions

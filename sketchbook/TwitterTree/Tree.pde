@@ -57,7 +57,7 @@ class Tree {
     } else { // new val >= curr, so look down right subtree
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null ) {
-        newNode.x = stRoot.x + (distx / col);
+        newNode.x = stRoot.x + (stRoot.x / col);
         newNode.y = stRoot.y + 100;
         newNode.parentX = stRoot.x;
         newNode.parentY = stRoot.y;

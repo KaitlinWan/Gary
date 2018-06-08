@@ -63,7 +63,7 @@ public class Heap {
       parentPos = (addValPos-1) / 2;
 
       if ( rt < _heap.get(parentPos).getRetweetCount()) {//addVal < parent
-        _heap.swap(addValPos, parentPos);
+        swap(addValPos, parentPos);
         addValPos = parentPos;
       } else
         break;
@@ -87,7 +87,7 @@ public class Heap {
       parentPos = (addValPos-1) / 2;
 
       if ( rt > _heap.get(parentPos).getRetweetCount()) {//addVal < parent
-        _heap.swap( addValPos, parentPos );
+        swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
         break;
@@ -111,7 +111,7 @@ public class Heap {
     int followers = addVal.getUser().getFollowersCount();
 
     //Add value as last node, to maintain balance, completeness of tree
-    _heap.maxAddF(addVal);
+    _heap.add(addVal);
 
     int addValPos = _heap.size() - 1;
     int parentPos;
@@ -121,7 +121,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( followers.compareTo(_heap.get(parentPos).getUser().getFollowersCount())) > 0 ) {//addVal < parent
+      if ( followers > _heap.get(parentPos).getUser().getFollowersCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
@@ -134,7 +134,7 @@ public class Heap {
     int followers = addVal.getUser().getFollowersCount();
 
     //Add value as last node, to maintain balance, completeness of tree
-    _heap.maxAddF(addVal);
+    _heap.add(addVal);
 
     int addValPos = _heap.size() - 1;
     int parentPos;
@@ -144,7 +144,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( followers.compareTo(_heap.get(parentPos).getUser().getFollowersCount())) < 0 ) {//addVal < parent
+      if ( followers < _heap.get(parentPos).getUser().getFollowersCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
@@ -169,7 +169,7 @@ public class Heap {
     int favorites = addVal.getFavoriteCount();
 
     //Add value as last node, to maintain balance, completeness of tree
-    _heap.maxAddF(addVal);
+    _heap.add(addVal);
 
     int addValPos = _heap.size() - 1;
     int parentPos;
@@ -179,19 +179,19 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( favorites.compareTo(_heap.get(parentPos).getFavoriteCount())) > 0 ) {//addVal < parent
+      if ( favorites > _heap.get(parentPos).getFavoriteCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
         break;
     }
   } //O(logn)
-  public void maxAddFav( Status addVal )
+  public void minAddFav( Status addVal )
   {
     int favorites = addVal.getFavoriteCount();
 
     //Add value as last node, to maintain balance, completeness of tree
-    _heap.maxAddF(addVal);
+    _heap.add(addVal);
 
     int addValPos = _heap.size() - 1;
     int parentPos;
@@ -201,7 +201,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( favorites.compareTo(_heap.get(parentPos).getFavoriteCount())) < 0 ) {//addVal < parent
+      if ( favorites < _heap.get(parentPos).getFavoriteCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else

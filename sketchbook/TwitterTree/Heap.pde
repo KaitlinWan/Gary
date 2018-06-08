@@ -6,11 +6,11 @@ import java.util.*;
 import java.util.ArrayList;
 
 public class Heap {
-  private ArrayList<Status> _heap;
+  private ArrayList<TreeNode> _heap;
   Tree heapTree = new Tree();
 
   Heap() {
-    _heap = new ArrayList<Status>();
+    _heap = new ArrayList<TreeNode>();
   }
 
   /*****************************************************
@@ -32,11 +32,12 @@ public class Heap {
     if ( _heap.size() < 1 )
       return null;
     else
-      return _heap.get(0);
+      return _heap.get(0)._cargo;
   } //O(1)
 
 
-  public void insert(Status status, int toSort, int struct) {
+  public void insert(Status s, int toSort, int struct) {
+    TreeNode status = new TreeNode(s, 0, 0);
     if (toSort == 1)
       addRT(status, struct);
     else if (toSort == 2)
@@ -48,7 +49,7 @@ public class Heap {
    RETWEET SORTING
    ***************/
 
-  public void addRT(Status val, int type) {
+  public void addRT(TreeNode val, int type) {
     if (type == 2) {
       maxAddRT(val);
     } else if (type == 3) {
@@ -57,9 +58,9 @@ public class Heap {
   }
 
   //adds tweets to heap based on retweets
-  public void minAddRT(Status addVal)
+  public void minAddRT(TreeNode addVal)
   {
-    int rt = addVal.getRetweetCount();
+    int rt = addVal._cargo.getRetweetCount();
 
     //Add value as last node, to maintain balance, completeness of tree
     _heap.add(addVal);
@@ -72,7 +73,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( rt < _heap.get(parentPos).getRetweetCount()) {//addVal < parent
+      if ( rt < _heap.get(parentPos)._cargo.getRetweetCount()) {//addVal < parent
         swap(addValPos, parentPos);
         addValPos = parentPos;
       } else
@@ -81,9 +82,9 @@ public class Heap {
   } //O(logn)
 
   //adds tweets to heap based on retweets
-  public void maxAddRT( Status addVal )
+  public void maxAddRT( TreeNode addVal )
   {
-    int rt = addVal.getRetweetCount();
+    int rt = addVal._cargo.getRetweetCount();
 
     //Add value as last node, to maintain balance, completeness of tree
     _heap.add(addVal);
@@ -96,7 +97,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( rt > _heap.get(parentPos).getRetweetCount()) {//addVal < parent
+      if ( rt > _heap.get(parentPos)._cargo.getRetweetCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
@@ -108,7 +109,7 @@ public class Heap {
    FOLLOWERS SORTING
    *************************************/
 
-  public void addFol(Status val, int type) {
+  public void addFol(TreeNode val, int type) {
     if (type == 2) {
       maxAddFol(val);
     } else if (type == 3) {
@@ -116,9 +117,9 @@ public class Heap {
     }
   }
 
-  public void maxAddFol( Status addVal )
+  public void maxAddFol( TreeNode addVal )
   {
-    int followers = addVal.getUser().getFollowersCount();
+    int followers = addVal._cargo.getUser().getFollowersCount();
 
     //Add value as last node, to maintain balance, completeness of tree
     _heap.add(addVal);
@@ -131,7 +132,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( followers > _heap.get(parentPos).getUser().getFollowersCount()) {//addVal < parent
+      if ( followers > _heap.get(parentPos)._cargo.getUser().getFollowersCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
@@ -139,9 +140,9 @@ public class Heap {
     }
   } //O(logn)
 
-  public void minAddFol( Status addVal )
+  public void minAddFol( TreeNode addVal )
   {
-    int followers = addVal.getUser().getFollowersCount();
+    int followers = addVal._cargo.getUser().getFollowersCount();
 
     //Add value as last node, to maintain balance, completeness of tree
     _heap.add(addVal);
@@ -154,7 +155,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( followers < _heap.get(parentPos).getUser().getFollowersCount()) {//addVal < parent
+      if ( followers < _heap.get(parentPos)._cargo.getUser().getFollowersCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
@@ -166,7 +167,7 @@ public class Heap {
    FAVORITES SORTING
    ********************************************/
 
-  public void addFav(Status val, int type) {
+  public void addFav(TreeNode val, int type) {
     if (type == 2) {
       maxAddFav(val);
     } else if (type == 3) {
@@ -174,9 +175,9 @@ public class Heap {
     }
   }
 
-  public void maxAddFav( Status addVal )
+  public void maxAddFav( TreeNode addVal )
   {
-    int favorites = addVal.getFavoriteCount();
+    int favorites = addVal._cargo.getFavoriteCount();
 
     //Add value as last node, to maintain balance, completeness of tree
     _heap.add(addVal);
@@ -189,16 +190,16 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( favorites > _heap.get(parentPos).getFavoriteCount()) {//addVal < parent
+      if ( favorites > _heap.get(parentPos)._cargo.getFavoriteCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
         break;
     }
   } //O(logn)
-  public void minAddFav( Status addVal )
+  public void minAddFav( TreeNode addVal )
   {
-    int favorites = addVal.getFavoriteCount();
+    int favorites = addVal._cargo.getFavoriteCount();
 
     //Add value as last node, to maintain balance, completeness of tree
     _heap.add(addVal);
@@ -211,7 +212,7 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( favorites < _heap.get(parentPos).getFavoriteCount()) {//addVal < parent
+      if ( favorites < _heap.get(parentPos)._cargo.getFavoriteCount()) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
@@ -221,65 +222,20 @@ public class Heap {
   
     private void swap( int pos1, int pos2 )
   {
-    _heap.set( pos1, _heap.set( pos2, _heap.get(pos1) ) );
+    
+    Status lowerSwap = _heap.get(pos1)._cargo;
+    Status upperSwap = _heap.get(pos2)._cargo;
+    
+    _heap.get(pos1).setValue(upperSwap);
+    _heap.get(pos2).setValue(lowerSwap);
+
   }
   
   void update() {
     //numPrinted = 0;
-    createHeap(0);
+    for (int i = 0; i < _heap.size(); i ++) {
+      System.out.println(i + ": " + _heap.get(i)._cargo.getUser().getFollowersCount());
+    }
   }
- 
    
-  void createHeap(int index) {
-     fill(255);
-     int posX;
-     int posY;
-     int parentX;
-     int parentY;
-     
-     if ( _heap.get(index) == null) {//stepped beyond leaf
-      return;
-    }
-    
-    
-    if (index == 0) {
-       heapTree._root = _heap.get(index);
-    }
-    else {
-      heapTree._root = _heap;
-    }
-    
-    else if (index < 7) {
-       posX = (width / 5) * (index / 3);
-       posY = 260;
-    }
-    
-    else
-      return;
-      
-    /*
-    if (heap.get(0).getLeft() != null) {
-      stroke(255);
-      line(currNode.x, currNode.y, currNode.left.x, currNode.left.y);
-    }
-    if (heap.get(0).getRight() != null) {
-      stroke(255);
-      line(currNode.x, currNode.y, currNode.right.x, currNode.right.y);
-    }
-    */
-    noStroke();
-    ellipse(posX, posY, 40, 40);
-    fill(0);
-    textSize(15);
-    text(_heap.get(index).getUser().getFollowersCount(), posX - 15, posY + 5);
-    
-    int newIndex = index * 2;
-    newIndex += 1;
-    if (newIndex < _heap.size())
-       createHeap(newIndex);
-
-    newIndex += 1;
-    if (newIndex < _heap.size())
-      createHeap(newIndex);
-  }
 }

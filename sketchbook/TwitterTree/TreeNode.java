@@ -12,7 +12,7 @@ public class TreeNode
 
   //instance variables / attributes of a TreeNode:
   Status _cargo;        //this node's data
-  TreeNode left, right; //poStatusers to left, right subtrees
+  TreeNode left, right, parent; //poStatusers to left, right subtrees
   int rt; //stores retweets
   int followers; //stores followers of tweeter  
   int x,y, parentX, parentY; //stores coordinates
@@ -69,7 +69,9 @@ public class TreeNode
     return right;
   }
 
-
+  TreeNode getParent() {
+    return parent;
+  }
   /*****************************************************
    * Returns the value stored in this tree node.
    *****************************************************/
@@ -104,8 +106,10 @@ public class TreeNode
   {
     right = theNewRight;
   }
-
-
+  
+  void setParent( TreeNode newParent ) {
+    parent = newParent;
+  }
   /*****************************************************
    * Sets the value of this tree node.
    *****************************************************/

@@ -25,7 +25,7 @@ char letter;
 /*The following is a variable that indicates the sortBy method:
  * 1 = Retweets
  * 2 = followers
- * 3 = location
+ * 3 = Favorites
  */
 int sortBy = 0;
 
@@ -75,13 +75,13 @@ void setup() {
   buttons.add(sort);
   Button Retweets = new Button(width - 480, height - 370, 200, 50, "Retweets");
   Button followers = new Button(width - 480, height - 300, 200, 50, "Followers");
-  Button location = new Button(width - 480, height - 230, 200, 50, "Favorites");
+  Button favorites = new Button(width - 480, height - 230, 200, 50, "Favorites");
   Button minHeap = new Button(width - 240, height - 230, 200, 50, "Min Heap");
   Button maxHeap = new Button(width - 240, height - 300, 200, 50, "Max Heap");
   Button binaryTree = new Button(width - 240, height - 370, 200, 50, "Binary Tree");
   buttons.add(Retweets);
   buttons.add(followers);
-  buttons.add(location);
+  buttons.add(favorites);
   buttons.add(minHeap);
   buttons.add(maxHeap);
   buttons.add(binaryTree);
@@ -150,7 +150,7 @@ void draw() {
       else if (sortBy == 2)
         info += "Followers";
       else if (sortBy == 3)
-        info += "Location";
+        info += "Favorites";
       info += "\n" + "type of structure: ";
       if (struct == 1)
         info += "Binary Tree";

@@ -306,21 +306,21 @@ public class Heap {
       }
     }
     int in = 15;
-    int text;
+    String text;
     for (TreeNode t : _heap) {
       fill(255);
       noStroke();
       if (in > 0) {
-        ellipse(t.x, t.y, 40, 40);
-        fill(0);
-        textSize(15);
         if (sortM == 1) 
-          text = t._cargo.getRetweetCount();
+          text = t._cargo.getRetweetCount() + " ";
         else if (sortM == 2) 
-          text = t._cargo.getUser().getFollowersCount();
+          text = t._cargo.getUser().getFollowersCount() + " ";
         else 
-          text = t._cargo.getFavoriteCount();
-        text(text, t.x - 10, t.y + 5);
+          text = t._cargo.getFavoriteCount()+ " ";
+        ellipse(t.x, t.y, textWidth(text), textWidth(text));
+        fill(0);
+        textSize(15);        
+        text(text, t.x - (textWidth(text) / 2), t.y + 5);
       }
       in --;
       

@@ -47,6 +47,7 @@ class Tree {
       if ( stRoot.getLeft() == null ) {
         
         stRoot.setLeft( newNode );
+        stRoot.getLeft().setParent(stRoot);
       }
       else //recurse down left subtree
       insertRT( stRoot.getLeft(), newNode, col + 1 );
@@ -57,6 +58,7 @@ class Tree {
       if ( stRoot.getRight() == null ) {
         
         stRoot.setRight( newNode );
+        stRoot.getRight().setParent(stRoot);
       }
       else //recurse down right subtree
       insertRT( stRoot.getRight(), newNode, col + 1 );
@@ -73,6 +75,7 @@ class Tree {
       if ( stRoot.getLeft() == null ) {
         
         stRoot.setLeft( newNode );
+        stRoot.getLeft().setParent(stRoot);
       }
       else //recurse down left subtree
       insertF( stRoot.getLeft(), newNode, col + 1 );
@@ -82,6 +85,7 @@ class Tree {
       if ( stRoot.getRight() == null ) {
         
         stRoot.setRight( newNode );
+        stRoot.getRight().setParent(stRoot);
       }
       else //recurse down right subtree
       insertF( stRoot.getRight(), newNode, col + 1 );

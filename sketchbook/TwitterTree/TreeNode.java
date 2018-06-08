@@ -15,7 +15,7 @@ public class TreeNode
   TreeNode left, right; //poStatusers to left, right subtrees
   int rt; //stores retweets
   int followers; //stores followers of tweeter  
-  int x,y; //stores coordinates
+  int x,y, parentX, parentY; //stores coordinates
 
 
   /*****************************************************
@@ -23,10 +23,12 @@ public class TreeNode
    * Construct a tree node with specified value, 
    * with null left and right subtrees.
    *****************************************************/
-  TreeNode( Status initValue )
+  TreeNode( Status initValue, int xCor, int yCor )
   {
     _cargo = initValue;
     followers = _cargo.getUser().getFollowersCount();
+    x = xCor;
+    y = yCor;
   }
           
 
@@ -34,7 +36,7 @@ public class TreeNode
    * overloaded constructor
    * Construct tree node w specified value, left, and right subtrees.
    *****************************************************/
-  TreeNode( Status initValue, TreeNode initLeft, TreeNode initRight ) 
+  /*TreeNode( Status initValue, TreeNode initLeft, TreeNode initRight ) 
   {
     this(initValue);
     left = initLeft;

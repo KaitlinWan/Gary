@@ -25,7 +25,7 @@ public class Heap {
    * Returns min value in heap
    * Postcondition: Heap remains unchanged.
    *****************************************************/
-  public Integer peekMin()
+  public Status peekMin()
   {
     if ( _heap.size() < 1 )
       return null;

@@ -43,11 +43,10 @@ class Tree {
   
   public void insertRT( TreeNode stRoot, TreeNode newNode, int col )
   {
-    int distx = abs(stRoot.y - origCol);
     if ( newNode.getRT() < stRoot.getRT() ) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null ) {
-        newNode.x = stRoot.x - (distx / 2);
+        newNode.x = stRoot.x - (abs(origCol - stRoot.x) / 2);
         newNode.y = stRoot.y + 100;
         newNode.parentX = stRoot.x;
         newNode.parentY = stRoot.y;
@@ -75,11 +74,11 @@ class Tree {
   {
     int rootFollowers = stRoot.getStatus().getUser().getFollowersCount();
     int newFollowers = newNode.getStatus().getUser().getFollowersCount();
-    int distx = abs(stRoot.y - origCol);
+    int distx = abs(stRoot.x - origCol);
     if ( rootFollowers > newFollowers) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null ) {
-        newNode.x = stRoot.x - (distx / 2);
+        newNode.x = abs(width - stRoot.x) / 2;
         newNode.y = stRoot.y + 100;
         newNode.parentX = stRoot.x;
         newNode.parentY = stRoot.y;
@@ -92,7 +91,7 @@ class Tree {
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null ) {
         
-        newNode.x = stRoot.x + (distx / 2);
+        newNode.x = stRoot.x + (abs(width - stRoot.x) / 2);
         newNode.y = stRoot.y + 100;
         newNode.parentX = stRoot.x;
         newNode.parentY = stRoot.y;
@@ -157,7 +156,6 @@ class Tree {
       stroke(255);
       line(currNode.x, currNode.y, currNode.right.x, currNode.right.y);
     }
-    System.out.println(currNode.y);
     noStroke();
     ellipse(currNode.x, currNode.y, 40, 40);
     fill(0);

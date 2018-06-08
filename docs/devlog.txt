@@ -7,19 +7,25 @@ DEVLOG
 <b>Obstacles Overcome:</b>
 -At first, we had a lot of trouble getting started on our project. This is because our project required the use of libraries that we did not have immediate access to. To solve this problem we applied for a developer’s account on Twitter. After our acceptances, we face more challenges. 
 -We had to learn processing completely from scratch after our little exposure. It was difficult to get used to the special methods that are essential to creating a well put together interface.
-- We had to get around "rate limiting," in which Twitter limits the number of requests you can make for a tweet - this was our biggest problem starting out
+- We had to get around "rate limiting," in which Twitter limits the number of requests you can make for a tweet - this was our biggest problem starting out, but we were able to issue large queries and temporarily store them eliminating this potential issue.
 
 <b>Unresolved Issues:</b>
-Although initially one of our goals, we were unable to implement replying to other tweets in time.
+Although initially one of our goals, we were unable to implement replying to other tweets that are shown in the data structures in time.
 
 <b>Mid-development Design Changes (and why!):</b>
 -We wanted to do a interactive interface where you are able to rearrange tweets, but that would defeat the whole purpose of sorting them in the first place. 
 -Also, while we felt that sorting tweets based on proximity to user would have been cool to see, even possibly mapping out the tweets, but midway through coding, we found that very tweets actually enabled location, making it difficult to get consistent and reliable results.
 -Replying to other tweets, although a cool feature to have, was ultimitely discarded because it wasn't a core part of our program.
 
+<b>Cool Stuff Learned (conceptual and/or practical)</b>
+We learned how to retrieve Tweet information from the web, which was actually very cool and gave us a lot of information at our fingertips.
+We also learned how to create visualizations of data structures, which is not only practical, but also a really challenging (and rewarding) mental excercise.
+Finally, we really got a closer look at data science, and could see the value in being able to effectively organize data in certain structures, which was the central aim of our project.
+
 <b>Lessons Learned (...which you might apply to future projects, CS or otherwise) ...have you achieved flow?</b>
 We learned to plan our time more wisely, and assigning each person specific tasks to complete by a specific time. More face-to-face coding sessions would’ve been helpful as well, since we found that we were more collaborative and more effective when working together in the same space.
 Start with a simple concept, and then expand, rather than the other way around. We felt like our goal was too grand at the beginning, and it was hard to map out a clear and effective path towards achieving our ultimate vision. Starting out with a more simple goal would have made our lives easier.
+The actual visualization of a data structure from scratch was a very hard and tedious thing to create. There is a lot of updating that needs to happen to the various heaps and trees, and one tiny mistake in either the positioning of the nodes or the creation of the data structure itself can lead to hours upon hours of error handling and reading over code to identify the often simple issue.
 
 
 

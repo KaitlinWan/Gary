@@ -208,4 +208,9 @@ public class Heap {
         break;
     }
   } //O(logn)
+  
+    private void swap( int pos1, int pos2 )
+  {
+    _heap.set( pos1, _heap.set( pos2, _heap.get(pos1) ) );
+  }
 }

@@ -3,6 +3,26 @@ Kaitlin Wan, Joshua Weiner, Eric Wong
 APCS2 Period 8
 
 DEVLOG
+
+<b>Obstacles Overcome:</b>
+-At first, we had a lot of trouble getting started on our project. This is because our project required the use of libraries that we did not have immediate access to. To solve this problem we applied for a developer’s account on Twitter. After our acceptances, we face more challenges. 
+-We had to learn processing completely from scratch after our little exposure. It was difficult to get used to the special methods that are essential to creating a well put together interface.
+- We had to get around "rate limiting," in which Twitter limits the number of requests you can make for a tweet - this was our biggest problem starting out
+
+<b>Unresolved Issues:</b>
+Although initially one of our goals, we were unable to implement replying to other tweets in time.
+
+<b>Mid-development Design Changes (and why!):</b>
+-We wanted to do a interactive interface where you are able to rearrange tweets, but that would defeat the whole purpose of sorting them in the first place. 
+-Also, while we felt that sorting tweets based on proximity to user would have been cool to see, even possibly mapping out the tweets, but midway through coding, we found that very tweets actually enabled location, making it difficult to get consistent and reliable results.
+-Replying to other tweets, although a cool feature to have, was ultimitely discarded because it wasn't a core part of our program.
+
+<b>Lessons Learned (...which you might apply to future projects, CS or otherwise) ...have you achieved flow?</b>
+We learned to plan our time more wisely, and assigning each person specific tasks to complete by a specific time. More face-to-face coding sessions would’ve been helpful as well, since we found that we were more collaborative and more effective when working together in the same space.
+Start with a simple concept, and then expand, rather than the other way around. We felt like our goal was too grand at the beginning, and it was hard to map out a clear and effective path towards achieving our ultimate vision. Starting out with a more simple goal would have made our lives easier.
+
+
+
 ===============================================================
 05/14/18
 Group Initiated (SQUADED UP)
@@ -61,6 +81,10 @@ Added to button functionality, allowing them to change the type of structure and
 : Eric Wong
 ===============================================================
 6/7/18
-worked on adding to binary tree functionality: added methods to add and sort tweets within the tree; completed structure to hold retrieved tweets; added heap structure and the methods to sort by different means; revised README.
+worked on adding to binary tree functionality: added methods to add and sort tweets within the tree; completed structure to hold retrieved tweets; added heap structure and the methods to sort by different means; revised README; added functionality to display additional information about each tweet.
 :Eric Wong
+created the visual representation of the heap and binary tree in processing
+:Josh
+created home page that allows user to post a tweet or search for a query
+:Kaitlin
  

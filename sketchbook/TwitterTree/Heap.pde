@@ -330,6 +330,11 @@ public class Heap {
         else 
           text = t._cargo.getFavoriteCount()+ " ";
         fill(255);
+        if (t.y < 700 && t != _heap.get(0)) {
+          stroke(255);
+          line(t.getParent().x, t.getParent().y + 5, t.x, t.y);
+        }
+        noStroke();
         ellipse(t.x, t.y, textWidth(text), textWidth(text));
         fill(0);
         textSize(15);        

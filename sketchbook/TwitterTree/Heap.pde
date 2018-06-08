@@ -236,6 +236,7 @@ public class Heap {
   void update() {
     //numPrinted = 0;
     heapTree = new Tree();
+    heapTree._root = null;
     for (int i = 0; i < _heap.size(); i ++) {
       if (i == 0) {
         if (_heap.size() == 1) {
@@ -305,6 +306,7 @@ public class Heap {
       }
     }
     int in = 15;
+    int text;
     for (TreeNode t : _heap) {
       fill(255);
       noStroke();
@@ -312,7 +314,13 @@ public class Heap {
         ellipse(t.x, t.y, 40, 40);
         fill(0);
         textSize(15);
-        text(t._cargo.getUser().getFollowersCount(), t.x - 10, t.y + 5);
+        if (sortM == 1) 
+          text = t._cargo.getRetweetCount();
+        else if (sortM == 2) 
+          text = t._cargo.getUser().getFollowersCount();
+        else 
+          text = t._cargo.getFavoriteCount();
+        text(text, t.x - 10, t.y + 5);
       }
       in --;
       

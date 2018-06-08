@@ -177,6 +177,7 @@ void keyTyped() {
     } else if (key == ENTER) {
       q = words;
       askQ = false;
+      tweetHeap = new Heap();
       queryTwitter(q);
       canSearch = false;
     }

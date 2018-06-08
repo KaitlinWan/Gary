@@ -45,10 +45,7 @@ class Tree {
     if ( newNode.getRT() < stRoot.getRT() ) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null ) {
-        newNode.x = stRoot.x - (abs(origCol - stRoot.x) / 2);
-        newNode.y = stRoot.y + 100;
-        newNode.parentX = stRoot.x;
-        newNode.parentY = stRoot.y;
+        
         stRoot.setLeft( newNode );
       }
       else //recurse down left subtree
@@ -58,10 +55,7 @@ class Tree {
     else { // new val >= curr, so look down right subtree
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null ) {
-        newNode.x = stRoot.x + (stRoot.x / col);
-        newNode.y = stRoot.y + 100;
-        newNode.parentX = stRoot.x;
-        newNode.parentY = stRoot.y;
+        
         stRoot.setRight( newNode );
       }
       else //recurse down right subtree
@@ -74,14 +68,10 @@ class Tree {
   {
     int rootFollowers = stRoot.getStatus().getUser().getFollowersCount();
     int newFollowers = newNode.getStatus().getUser().getFollowersCount();
-    int distx = abs(stRoot.x - origCol);
     if ( rootFollowers > newFollowers) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null ) {
-        newNode.x = stRoot.x;
-        newNode.y = stRoot.y + 100;
-        newNode.parentX = stRoot.x;
-        newNode.parentY = stRoot.y;
+        
         stRoot.setLeft( newNode );
       }
       else //recurse down left subtree
@@ -91,10 +81,6 @@ class Tree {
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null ) {
         
-        newNode.x = stRoot.x + (abs(width - stRoot.x) / 2);
-        newNode.y = stRoot.y + 100;
-        newNode.parentX = stRoot.x;
-        newNode.parentY = stRoot.y;
         stRoot.setRight( newNode );
       }
       else //recurse down right subtree

@@ -308,6 +308,8 @@ void update(int x, int y, ArrayList<Button> buttons) {
           sorted = false;
           words = "";
           currList = new ArrayList<Status>(0);
+          tweetTree = new Tree();
+          tweetHeap = new Heap();
           index = 0;
         } else if (buttons.get(i).text == "search") {
           wannalook = true;

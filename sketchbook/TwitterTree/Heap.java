@@ -15,7 +15,9 @@ public class Heap {
    * boolean isEmpty()
    * Returns true if no meaningful elements in heap, false otherwise
    *****************************************************/
-  public boolean isEmpty() { return _heap.isEmpty(); } //O(1)
+  public boolean isEmpty() { 
+    return _heap.isEmpty();
+  } //O(1)
 
 
   /*****************************************************
@@ -25,61 +27,184 @@ public class Heap {
    *****************************************************/
   public Integer peekMin()
   {
-  if ( _heap.size() < 1 )
+    if ( _heap.size() < 1 )
       return null;
-  else
+    else
       return _heap.get(0);
-    } //O(1)
+  } //O(1)
 
-//adds tweets to heap based on retweets
-  public void minaddRT( Status addVal )
+  /**************
+   RETWEET SORTING
+   ***************/
+
+  public void addRT(Status val, int type) {
+    if (type == 2) {
+      maxAddRT(val);
+    } else if (type == 3) {
+      minAddRT(val);
+    }
+  }
+
+  //adds tweets to heap based on retweets
+  public void minAddRT( Status addVal )
   {
     int rt = addVal.getRetweetCount();
 
-  //Add value as last node, to maintain balance, completeness of tree
-  _heap.addRT(addVal);
+    //Add value as last node, to maintain balance, completeness of tree
+    _heap.minAddRT(addVal);
 
-  int addValPos = _heap.size() - 1;
-  int parentPos;
+    int addValPos = _heap.size() - 1;
+    int parentPos;
 
-  while( addValPos > 0 ) { //potentially swap until reach root
+    while ( addValPos > 0 ) { //potentially swap until reach root
 
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
       if ( rt.compareTo(_heap.get(parentPos).getRetweetCount()) < 0 ) {//addVal < parent
-    swap( addValPos, parentPos );
-    addValPos = parentPos;
-      }
-      else
-    break;
-  }
-    } //O(logn)
-
-    //adds tweets to heap based on retweets
-      public void maxaddRT( Status addVal )
-      {
-        int rt = addVal.getRetweetCount();
-
-      //Add value as last node, to maintain balance, completeness of tree
-      _heap.addRT(addVal);
-
-      int addValPos = _heap.size() - 1;
-      int parentPos;
-
-      while( addValPos > 0 ) { //potentially swap until reach root
-
-          //pinpoint parent
-          parentPos = (addValPos-1) / 2;
-
-          if ( rt.compareTo(_heap.get(parentPos).getRetweetCount()) > 0 ) {//addVal < parent
         swap( addValPos, parentPos );
         addValPos = parentPos;
-          }
-          else
+      } else
         break;
-      }
-        } //O(logn)
+    }
+  } //O(logn)
 
+  //adds tweets to heap based on retweets
+  public void maxAddRT( Status addVal )
+  {
+    int rt = addVal.getRetweetCount();
 
+    //Add value as last node, to maintain balance, completeness of tree
+    _heap.maxAddRT(addVal);
+
+    int addValPos = _heap.size() - 1;
+    int parentPos;
+
+    while ( addValPos > 0 ) { //potentially swap until reach root
+
+      //pinpoint parent
+      parentPos = (addValPos-1) / 2;
+
+      if ( rt.compareTo(_heap.get(parentPos).getRetweetCount()) > 0 ) {//addVal < parent
+        swap( addValPos, parentPos );
+        addValPos = parentPos;
+      } else
+        break;
+    }
+  } //O(logn)
+
+  /************************************
+   FOLLOWERS SORTING
+   *************************************/
+
+  public void addFol(Status val, int type) {
+    if (type == 2) {
+      maxAddFol(val);
+    } else if (type == 3) {
+      minAddFol(val);
+    }
+  }
+
+  public void maxAddFol( Status addVal )
+  {
+    int followers = addVal.getUser().getFollowersCount();
+
+    //Add value as last node, to maintain balance, completeness of tree
+    _heap.maxAddF(addVal);
+
+    int addValPos = _heap.size() - 1;
+    int parentPos;
+
+    while ( addValPos > 0 ) { //potentially swap until reach root
+
+      //pinpoint parent
+      parentPos = (addValPos-1) / 2;
+
+      if ( followers.compareTo(_heap.get(parentPos).getUser().getFollowersCount())) > 0 ) {//addVal < parent
+        swap( addValPos, parentPos );
+        addValPos = parentPos;
+      } else
+        break;
+    }
+  } //O(logn)
+
+  public void minAddFol( Status addVal )
+  {
+    int followers = addVal.getUser().getFollowersCount();
+
+    //Add value as last node, to maintain balance, completeness of tree
+    _heap.maxAddF(addVal);
+
+    int addValPos = _heap.size() - 1;
+    int parentPos;
+
+    while ( addValPos > 0 ) { //potentially swap until reach root
+
+      //pinpoint parent
+      parentPos = (addValPos-1) / 2;
+
+      if ( followers.compareTo(_heap.get(parentPos).getUser().getFollowersCount())) < 0 ) {//addVal < parent
+        swap( addValPos, parentPos );
+        addValPos = parentPos;
+      } else
+        break;
+    }
+  } //O(logn)
+
+  /*******************************************
+   FAVORITES SORTING
+   ********************************************/
+
+  public void addFav(Status val, int type) {
+    if (type == 2) {
+      maxAddFav(val);
+    } else if (type == 3) {
+      minAddFav(val);
+    }
+  }
+
+  public void maxAddFav( Status addVal )
+  {
+    int favorites = addVal.getFavoriteCount();
+
+    //Add value as last node, to maintain balance, completeness of tree
+    _heap.maxAddF(addVal);
+
+    int addValPos = _heap.size() - 1;
+    int parentPos;
+
+    while ( addValPos > 0 ) { //potentially swap until reach root
+
+      //pinpoint parent
+      parentPos = (addValPos-1) / 2;
+
+      if ( favorites.compareTo(_heap.get(parentPos).getFavoriteCount())) > 0 ) {//addVal < parent
+        swap( addValPos, parentPos );
+        addValPos = parentPos;
+      } else
+        break;
+    }
+  } //O(logn)
+  public void maxAddFav( Status addVal )
+  {
+    int favorites = addVal.getFavoriteCount();
+
+    //Add value as last node, to maintain balance, completeness of tree
+    _heap.maxAddF(addVal);
+
+    int addValPos = _heap.size() - 1;
+    int parentPos;
+
+    while ( addValPos > 0 ) { //potentially swap until reach root
+
+      //pinpoint parent
+      parentPos = (addValPos-1) / 2;
+
+      if ( favorites.compareTo(_heap.get(parentPos).getFavoriteCount())) < 0 ) {//addVal < parent
+        swap( addValPos, parentPos );
+        addValPos = parentPos;
+      } else
+        break;
+    }
+  } //O(logn)
 }

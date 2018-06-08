@@ -310,6 +310,18 @@ public class Heap {
     for (TreeNode t : _heap) {
       fill(255);
       noStroke();
+      if(mouseX >= t.getX() && mouseX <= (t.getX() + 40) && mouseY >= t.getY() && mouseY <= t.getY() + 40) {
+        rect(10,height-200,400,200);
+        String details = "";
+        details += "User: " + t.getStatus().getUser().getName();
+        details += "\n" + t.getStatus().getText();
+        details += "\n" + "retweets: " + t.getStatus().getRetweetCount();
+        details += "\n" + "followers: " + t.getStatus().getUser().getFollowersCount();
+        details += "\n" + "favorites: " + t.getStatus().getFavoriteCount();
+        fill(67,23,90);
+        textSize(12);
+        text(details, 17, height-180, 380,180);
+      }
       if (in > 0) {
         if (sortM == 1) 
           text = t._cargo.getRetweetCount() + " ";
@@ -317,6 +329,7 @@ public class Heap {
           text = t._cargo.getUser().getFollowersCount() + " ";
         else 
           text = t._cargo.getFavoriteCount()+ " ";
+        fill(255)
         ellipse(t.x, t.y, textWidth(text), textWidth(text));
         fill(0);
         textSize(15);        

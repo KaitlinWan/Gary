@@ -61,6 +61,6 @@ Added to button functionality, allowing them to change the type of structure and
 : Eric Wong
 ===============================================================
 6/7/18
-worked on adding to tree functionality: added methods to add and sort tweets within the tree; completed structure to hold retrieved tweets
+worked on adding to binary tree functionality: added methods to add and sort tweets within the tree; completed structure to hold retrieved tweets; added heap structure and the methods to sort by different means; revised README.
 :Eric Wong
  

@@ -16,28 +16,29 @@ String words = "";
 char letter;
 
 /*The following is a variable that indicates the sortBy method:
- * 1 = retweets
+ * 1 = Retweets
  * 2 = followers
  * 3 = location
  */
 int sortBy = 0;
 
 /*The following is a variable that indicates the data structure type:
- * 1 = minHeap
+ * 3 = minHeap
  * 2 = maxHeap
- * 3 = binary tree
+ * 1 = binary tree
  */
 int struct = 0;
 
 ArrayList<Status> currList = new ArrayList<Status>();
-ArrayList<Status> sortedTweets = new ArrayList<Status>();
+ArrayList<Status> sortedtweetTree = new ArrayList<Status>();
 int index = 0;
 int dispIndex = 0;
 int xDist = width - 20;
 String tweetText;
 
 
-Tree tweets;
+Tree tweetTree;
+Heap tweetHeap;
 ConfigurationBuilder cb; 
 Query query; 
 Twitter twitter;
@@ -51,7 +52,8 @@ void setup() {
   cb.setOAuthAccessTokenSecret("SRUatIDTe2Z1c8Syov3jQepZKDGrZq0GjWVspUJS4nFoV");
 
   twitter = new TwitterFactory(cb.build()).getInstance();
-  tweets = new Tree();
+  tweetTree = new Tree();
+  tweetHeap = new Heap();
 
   size(1024, 768);
   background(color(18, 22, 33));
@@ -64,13 +66,13 @@ void setup() {
   buttons.add(searchAgain);
   Button sort = new Button(width - 360, height - 160, 200, 50, "Sort");
   buttons.add(sort);
-  Button retweets = new Button(width - 480, height - 370, 200, 50, "Retweets");
+  Button Retweets = new Button(width - 480, height - 370, 200, 50, "Retweets");
   Button followers = new Button(width - 480, height - 300, 200, 50, "Followers");
   Button location = new Button(width - 480, height - 230, 200, 50, "QLocation");
   Button minHeap = new Button(width - 240, height - 230, 200, 50, "Min Heap");
   Button maxHeap = new Button(width - 240, height - 300, 200, 50, "Max Heap");
   Button binaryTree = new Button(width - 240, height - 370, 200, 50, "Binary Tree");
-  buttons.add(retweets);
+  buttons.add(Retweets);
   buttons.add(followers);
   buttons.add(location);
   buttons.add(minHeap);
@@ -120,14 +122,18 @@ void draw() {
       
       if (frameCount >= 20) {
         if (dispIndex < currList.size()) {
-          tweets.insert(currList.get(dispIndex), sortBy);
+          if (struct == 1) //Binary Tree
+             tweetTree.insert(currList.get(dispIndex), sortBy);
+          else 
+             tweetHeap.insert(currList.get(dispIndex), sortBy, struct);
+        }            
           //System.out.println(index);
 
           dispIndex ++;
-        }
         frameCount = 0;
       }
-      tweets.update();
+      tweetHeap.update();
+      tweetTree.update();
     }
     update(mouseX, mouseY, buttons);
     if (currList.size() != 0) {
@@ -186,7 +192,7 @@ void mouseClicked() {
           sort();
         }
         /*
-          for (Status s: sortedTweets) {
+          for (Status s: sortedtweetTree) {
          println(s.getUser().getFollowersCount());
          }
          */
@@ -249,7 +255,8 @@ void queryTwitter(String search) {
 
 void sort() {
   sorted = true;
-  tweets._root = null;
+  tweetTree._root = null;
+  tweetHeap = new Heap();
 }
 
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Heap {
   private ArrayList<Status> _heap;
+  Tree heapTree = new Tree();
 
   Heap() {
     _heap = new ArrayList<Status>();
@@ -34,6 +35,15 @@ public class Heap {
       return _heap.get(0);
   } //O(1)
 
+
+  public void insert(Status status, int toSort, int struct) {
+    if (toSort == 1)
+      addRT(status, struct);
+    else if (toSort == 2)
+      addFol(status, struct);
+    else
+      addFav(status, struct);
+  }
   /**************
    RETWEET SORTING
    ***************/
@@ -212,5 +222,62 @@ public class Heap {
     private void swap( int pos1, int pos2 )
   {
     _heap.set( pos1, _heap.set( pos2, _heap.get(pos1) ) );
+  }
+  
+  void update() {
+    //numPrinted = 0;
+    createHeap(0);
+  }
+ 
+   
+  void createHeap(int index) {
+     fill(255);
+     int posX;
+     int posY;
+     int parentX;
+     int parentY;
+     
+     if ( _heap.get(index) == null) {//stepped beyond leaf
+      return;
+    }
+    
+    
+    if (index == 0) {
+       heapTree._root = _heap.get(index);
+    }
+    else {
+      heapTree._root = _heap
+    }
+    else if (index < 7) {
+       posX = (width / 5) * (index / 3);
+       posY = 260;
+    }
+    else
+      return;
+      
+    /*
+    if (heap.get(0).getLeft() != null) {
+      stroke(255);
+      line(currNode.x, currNode.y, currNode.left.x, currNode.left.y);
+    }
+    if (heap.get(0).getRight() != null) {
+      stroke(255);
+      line(currNode.x, currNode.y, currNode.right.x, currNode.right.y);
+    }
+    */
+    noStroke();
+    ellipse(posX, posY, 40, 40);
+    fill(0);
+    textSize(15);
+    text(_heap.get(index).getUser().getFollowersCount(), posX - 15, posY + 5);
+    
+    int newIndex = index * 2;
+    newIndex += 1;
+    if (newIndex < _heap.size())
+       createHeap(newIndex);
+
+    newIndex += 1;
+    if (newIndex < _heap.size())
+      createHeap(newIndex);
   }
 }

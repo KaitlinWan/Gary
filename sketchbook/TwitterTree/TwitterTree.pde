@@ -87,9 +87,14 @@ void draw() {
     frameCount++;
 
     background(color(18, 22, 33));
-    textSize(25);
+    textSize(20);
     fill(255);
-    text("Welcome to a tree!", 50, 70);
+    text("Welcome to GaryTwitter!", 50, 70);
+    if (currList.size() == 0)
+       text("Oop! Looks like no results came up for that search. Try again!", 50, 130);
+    else
+       text("Select what metric you want to organize your query by, and how you want to visualize the data!", 50, 100);
+
     String info;
     if (sortBy == 0 && struct == 0) {
       info = "Please choose a sort method and a structure in which to display the sort";

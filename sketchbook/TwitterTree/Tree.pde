@@ -11,6 +11,7 @@ class Tree {
   int column;
   int origCol;
   int origRow;
+  int frameCount = 0;
   int limit = 10;
   int numPrinted = 0;
   
@@ -42,23 +43,27 @@ class Tree {
   
   public void insertRT( TreeNode stRoot, TreeNode newNode, int col )
   {
+    int distx = abs(stRoot.y - origCol);
     if ( newNode.getRT() < stRoot.getRT() ) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null ) {
-        
+        newNode.x = stRoot.x - (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
         stRoot.setLeft( newNode );
-        stRoot.getLeft().setParent(stRoot);
       }
       else //recurse down left subtree
       insertRT( stRoot.getLeft(), newNode, col + 1 );
       return;
-    } 
-    else { // new val >= curr, so look down right subtree
+    } else { // new val >= curr, so look down right subtree
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null ) {
-        
+        newNode.x = stRoot.x + (distx / col);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
         stRoot.setRight( newNode );
-        stRoot.getRight().setParent(stRoot);
       }
       else //recurse down right subtree
       insertRT( stRoot.getRight(), newNode, col + 1 );
@@ -70,12 +75,15 @@ class Tree {
   {
     int rootFollowers = stRoot.getStatus().getUser().getFollowersCount();
     int newFollowers = newNode.getStatus().getUser().getFollowersCount();
+    int distx = abs(stRoot.y - origCol);
     if ( rootFollowers > newFollowers) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null ) {
-        
+        newNode.x = stRoot.x - (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
         stRoot.setLeft( newNode );
-        stRoot.getLeft().setParent(stRoot);
       }
       else //recurse down left subtree
       insertF( stRoot.getLeft(), newNode, col + 1 );
@@ -84,11 +92,47 @@ class Tree {
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null ) {
         
+        newNode.x = stRoot.x + (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
         stRoot.setRight( newNode );
-        stRoot.getRight().setParent(stRoot);
       }
       else //recurse down right subtree
       insertF( stRoot.getRight(), newNode, col + 1 );
+      return;
+    }
+  }//end insert()
+  
+   public void insertFav( TreeNode stRoot, TreeNode newNode, int col )
+  {
+    int rootFav = stRoot.getStatus().getFavoriteCount();
+    int newFav = newNode.getStatus().getFavoriteCount();
+    int distx = abs(stRoot.y - origCol);
+    if ( rootFav > newFav) {
+      //if no left child, make newNode the left child
+      if ( stRoot.getLeft() == null ) {
+        newNode.x = stRoot.x - (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
+        stRoot.setLeft( newNode );
+      }
+      else //recurse down left subtree
+      insertFav( stRoot.getLeft(), newNode, col + 1 );
+      return;
+    } else { // new val >= curr, so look down right subtree
+      //if no right child, make newNode the right child
+      if ( stRoot.getRight() == null ) {
+        
+        newNode.x = stRoot.x + (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
+        stRoot.setRight( newNode );
+      }
+      else //recurse down right subtree
+      insertFav( stRoot.getRight(), newNode, col + 1 );
       return;
     }
   }//end insert()
@@ -104,9 +148,12 @@ class Tree {
   }
     //println(currNode.getStatus().getUser().getFollowersCount());
     
-      order.add(currNode.getStatus());
-      traverse( currNode.getLeft() );
+      order.add(0,currNode.getStatus());
       traverse( currNode.getRight() );
+      traverse( currNode.getLeft() );
+ 
+ 
+      
 
 
   }
@@ -116,11 +163,8 @@ class Tree {
   }
   
   
-  public void process() {
-    Status retStat = _root.getStatus();
-  }
-  
   void update() {
+    numPrinted = 0;
     createTree(_root); 
   }
    
@@ -129,49 +173,29 @@ class Tree {
      if ( currNode == null) {//stepped beyond leaf
       return;
     }
+    if (currNode.y > 496)
+      numPrinted = 6;
+    else
+      numPrinted = 0;
     
-    if (currNode == _root) {
-      currNode.x = width / 2;
-      currNode.y = 70;
-    }
-    else  {
-      if (_root.getLeft() == currNode) {
-        currNode.x = _root.x - 200;
-        currNode.y = _root.y + 150;
-      }
-      else if (_root.getRight() == currNode) {
-        currNode.x = _root.x + 200;
-        currNode.y = _root.y + 150;
-      }
-      else {
-        if (currNode == currNode.getParent().left) {
-          currNode.x = currNode.getParent().x - (abs(currNode.getParent().x - currNode.getParent().getParent().x) / 2);
-          currNode.y = currNode.getParent().y + 150;
-        }
-        else {
-          currNode.x = currNode.getParent().x - (abs(currNode.getParent().x - currNode.getParent().getParent().x) / 2);
-          currNode.y = currNode.getParent().y + 150;        
-        }
-        
-      }
-   
-    if (currNode.getLeft() != null) {
+    if (numPrinted > 5) 
+      return;
+      
+    if (currNode.getLeft() != null && currNode.y != 496) {
       stroke(255);
       line(currNode.x, currNode.y, currNode.left.x, currNode.left.y);
     }
-    if (currNode.getRight() != null) {
+    if (currNode.getRight() != null && currNode.y != 496) {
       stroke(255);
       line(currNode.x, currNode.y, currNode.right.x, currNode.right.y);
     }
-    
-    System.out.println(currNode.x + ", " + currNode.y);
+    System.out.println(currNode.y);
     noStroke();
     ellipse(currNode.x, currNode.y, 40, 40);
     fill(0);
     textSize(15);
-    text(currNode.followers, currNode.x - 15, currNode.y + 5);
+    text(currNode.getStatus().getRetweetCount(), currNode.x - 15, currNode.y + 5);
     createTree(currNode.getLeft());
     createTree(currNode.getRight());
-  }
   }
 }

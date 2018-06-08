@@ -80,6 +80,8 @@ void setup() {
   Button maxHeap = new Button(width - 240, height - 300, 200, 50, "Max Heap");
   Button binaryTree = new Button(width - 240, height - 370, 200, 50, "Binary Tree");
   Button home = new Button(width - 480, height - 370, 200, 50, "Home");
+  Button search = new Button(width - 360, height - 160, 200, 50, "search");
+  Button post = new Button(width - 360, height - 90, 200, 50, "post");
   buttons.add(Retweets);
   buttons.add(followers);
   buttons.add(favorites);
@@ -119,6 +121,7 @@ void draw() {
     text(words, 50, 60, 500, 300);
   } else {
     canSearchp = false;
+    canSearch = true;
   }
 
   if (wannalook) {
@@ -325,12 +328,12 @@ void update(int x, int y, ArrayList<Button> buttons) {
           words = "";
           pText = "";
         }
-      } else {
+      }
+    } else {
         buttons.get(i).col = 175;
       }
     }
   }
-}
 
   void queryTwitter(String search) { 
     System.out.println(search);

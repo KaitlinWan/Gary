@@ -11,7 +11,6 @@ class Tree {
   int column;
   int origCol;
   int origRow;
-  int frameCount = 0;
   int limit = 10;
   int numPrinted = 0;
   

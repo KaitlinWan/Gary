@@ -1,3 +1,4 @@
+
 import twitter4j.conf.*;
 import twitter4j.api.*;
 import twitter4j.*;
@@ -46,12 +47,12 @@ public class Heap {
   }
 
   //adds tweets to heap based on retweets
-  public void minAddRT( Status addVal )
+  public void minAddRT(Status addVal)
   {
     int rt = addVal.getRetweetCount();
 
     //Add value as last node, to maintain balance, completeness of tree
-    _heap.minAddRT(addVal);
+    _heap.add(addVal);
 
     int addValPos = _heap.size() - 1;
     int parentPos;
@@ -61,8 +62,8 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( rt.compareTo(_heap.get(parentPos).getRetweetCount()) < 0 ) {//addVal < parent
-        swap( addValPos, parentPos );
+      if ( rt < _heap.get(parentPos).getRetweetCount()) {//addVal < parent
+        _heap.swap(addValPos, parentPos);
         addValPos = parentPos;
       } else
         break;
@@ -75,7 +76,7 @@ public class Heap {
     int rt = addVal.getRetweetCount();
 
     //Add value as last node, to maintain balance, completeness of tree
-    _heap.maxAddRT(addVal);
+    _heap.add(addVal);
 
     int addValPos = _heap.size() - 1;
     int parentPos;
@@ -85,8 +86,8 @@ public class Heap {
       //pinpoint parent
       parentPos = (addValPos-1) / 2;
 
-      if ( rt.compareTo(_heap.get(parentPos).getRetweetCount()) > 0 ) {//addVal < parent
-        swap( addValPos, parentPos );
+      if ( rt > _heap.get(parentPos).getRetweetCount()) {//addVal < parent
+        _heap.swap( addValPos, parentPos );
         addValPos = parentPos;
       } else
         break;

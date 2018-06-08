@@ -72,6 +72,8 @@ Worked on retrieving specific pieces of data from tweets generated in queries.
 6/4/18
 Worked on display of tweets and tweet data
 : Joshua Weiner
+Created plan for future
+: Kaitlin Wan
 ===============================================================
 6/5/18
 Created buttons to enable user to organize data and go back to home screen to issue new queries
@@ -79,12 +81,15 @@ Worked further on display of tweets
 : Joshua Weiner
 Added to button functionality, allowing them to change the type of structure and sort method
 : Eric Wong
+Worked on location and geotagging of tweets, and revised README
+: Kaitlin Wan
 ===============================================================
 6/7/18
+SQUADDED UP AT WHOLE FOODS!!!
 worked on adding to binary tree functionality: added methods to add and sort tweets within the tree; completed structure to hold retrieved tweets; added heap structure and the methods to sort by different means; revised README; added functionality to display additional information about each tweet.
 :Eric Wong
 created the visual representation of the heap and binary tree in processing
-:Josh
+:J osh
 created home page that allows user to post a tweet or search for a query
-:Kaitlin
+: Kaitlin
  

@@ -121,7 +121,6 @@ class Tree {
   }
   
   void update() {
-    numPrinted = 0;
     createTree(_root); 
   }
    
@@ -130,6 +129,31 @@ class Tree {
      if ( currNode == null) {//stepped beyond leaf
       return;
     }
+    
+    if (currNode == _root) {
+      currNode.x = width / 2;
+      currNode.y = 70;
+    }
+    else  {
+      if (_root.getLeft() == currNode) {
+        currNode.x = _root.x - 200;
+        currNode.y = _root.y + 150;
+      }
+      else if (_root.getRight() == currNode) {
+        currNode.x = _root.x + 200;
+        currNode.y = _root.y + 150;
+      }
+      else {
+        if (currNode == currNode.getParent().left) {
+          currNode.x = currNode.getParent().x - (abs(currNode.getParent().x - currNode.getParent().getParent().x) / 2);
+          currNode.y = currNode.getParent().y + 150;
+        }
+        else {
+          currNode.x = currNode.getParent().x - (abs(currNode.getParent().x - currNode.getParent().getParent().x) / 2);
+          currNode.y = currNode.getParent().y + 150;        
+        }
+        
+      }
    
     if (currNode.getLeft() != null) {
       stroke(255);
@@ -139,6 +163,8 @@ class Tree {
       stroke(255);
       line(currNode.x, currNode.y, currNode.right.x, currNode.right.y);
     }
+    
+    System.out.println(currNode.x + ", " + currNode.y);
     noStroke();
     ellipse(currNode.x, currNode.y, 40, 40);
     fill(0);
@@ -146,5 +172,6 @@ class Tree {
     text(currNode.followers, currNode.x - 15, currNode.y + 5);
     createTree(currNode.getLeft());
     createTree(currNode.getRight());
+  }
   }
 }

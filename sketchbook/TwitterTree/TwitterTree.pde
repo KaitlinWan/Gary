@@ -5,6 +5,7 @@ import java.util.*;
 
 ArrayList<Button> buttons = new ArrayList<Button>();
 
+int frameCount = 0;
 PFont font;
 boolean askQ = true;
 boolean show = false;
@@ -31,6 +32,7 @@ int struct = 0;
 ArrayList<Status> currList = new ArrayList<Status>();
 ArrayList<Status> sortedTweets = new ArrayList<Status>();
 int index = 0;
+int dispIndex = 0;
 int xDist = width - 20;
 String tweetText;
 
@@ -80,6 +82,8 @@ void draw() {
   prompt("hello, please enter your search query below");
   //background(255);
   if (!askQ) {
+    frameCount++;
+
     background(color(18, 22, 33));
     textSize(25);
     fill(255);
@@ -113,11 +117,17 @@ void draw() {
     if (sorted == true) {
       background(color(18, 22, 33));
       buttons.get(0).update();
-      /*
-       for(Status s: sortedTweets) {
-       println(s.getUser().getFollowersCount());
-       }
-       }*/
+      
+      if (frameCount >= 20) {
+        if (dispIndex < currList.size()) {
+          tweets.insert(currList.get(dispIndex), sortBy);
+          //System.out.println(index);
+
+          dispIndex ++;
+        }
+        frameCount = 0;
+      }
+      tweets.update();
     }
     update(mouseX, mouseY, buttons);
     if (currList.size() != 0) {
@@ -172,6 +182,7 @@ void mouseClicked() {
     if (mouseX >= buttons.get(i).xcor && mouseX <= (buttons.get(i).xcor + buttons.get(i).wd) && mouseY >= buttons.get(i).ycor && mouseY <= (buttons.get(i).ycor + buttons.get(i).ht)) {
       if (buttons.get(i).text == "Sort") {
         if (sortBy > 0 || struct > 0) {
+          index = 0;
           sort();
         }
         /*
@@ -221,7 +232,7 @@ void update(int x, int y, ArrayList<Button> buttons) {
 void queryTwitter(String search) { 
   System.out.println(search);
   query = new Query(search);
-  query.setCount(5);
+  query.setCount(100);
   try {     
     QueryResult result = twitter.search(query);     
     List<Status> listTweets = result.getTweets();  
@@ -237,17 +248,8 @@ void queryTwitter(String search) {
 }
 
 void sort() {
-  for (Status tweet : currList)
-  {
-    tweets.insert(tweet, sortBy);
-  }
-  //println("New Tweet: " + tweet.getText());
-  tweets.traverse();
-  sortedTweets = tweets.getOrder();
   sorted = true;
-  for (Status s : sortedTweets) {
-    println(s.getRetweetCount());
-  }
+  tweets._root = null;
 }
 
 

@@ -7,7 +7,13 @@ import java.util.ArrayList;
 class Tree {
   TreeNode _root;
   ArrayList<Status> order = new ArrayList<Status>();
-  
+  int row;
+  int column;
+  int origCol;
+  int origRow;
+  int frameCount = 0;
+  int limit = 10;
+  int numPrinted = 0;
   
   Tree() {
     _root = null;
@@ -15,58 +21,85 @@ class Tree {
   }
   
   public void insert(Status newVal, int sortM) {
-    TreeNode newNode = new TreeNode(newVal);
+    TreeNode newRoot = new TreeNode(newVal, width / 2, 60);
     if ( _root == null ) {
-      _root = newNode;
+      _root = newRoot;
+      origCol = width / 2;
+      origRow = height / 8;
+      _root.x = origCol;
+      _root.y = origRow;
       return;
     }
     if (sortM == 1) {
-      insertRT( _root, newNode );
+      insertRT( _root, newRoot, 2);
     }
     else if(sortM == 2) {
-      insertF(_root,newNode);
+      insertF(_root, newRoot, 2);
     }
     else if(sortM == 3) {
       //insertL(_root, newNode);
     }
   }
   
-  public void insertRT( TreeNode stRoot, TreeNode newNode )
+  public void insertRT( TreeNode stRoot, TreeNode newNode, int col )
   {
+    int distx = abs(stRoot.y - origCol);
     if ( newNode.getRT() < stRoot.getRT() ) {
       //if no left child, make newNode the left child
-      if ( stRoot.getLeft() == null )
+      if ( stRoot.getLeft() == null ) {
+        newNode.x = stRoot.x - (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
         stRoot.setLeft( newNode );
+      }
       else //recurse down left subtree
-      insertRT( stRoot.getLeft(), newNode );
+      insertRT( stRoot.getLeft(), newNode, col + 1 );
       return;
     } else { // new val >= curr, so look down right subtree
       //if no right child, make newNode the right child
-      if ( stRoot.getRight() == null )
+      if ( stRoot.getRight() == null ) {
+        newNode.x = stRoot.x + (distx / col);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
         stRoot.setRight( newNode );
+      }
       else //recurse down right subtree
-      insertRT( stRoot.getRight(), newNode );
+      insertRT( stRoot.getRight(), newNode, col + 1 );
       return;
     }
   }//end insert()
   
- public void insertF( TreeNode stRoot, TreeNode newNode )
+ public void insertF( TreeNode stRoot, TreeNode newNode, int col )
   {
     int rootFollowers = stRoot.getStatus().getUser().getFollowersCount();
     int newFollowers = newNode.getStatus().getUser().getFollowersCount();
-    if ( rootFollowers < newFollowers) {
+    int distx = abs(stRoot.y - origCol);
+    if ( rootFollowers > newFollowers) {
       //if no left child, make newNode the left child
-      if ( stRoot.getLeft() == null )
+      if ( stRoot.getLeft() == null ) {
+        newNode.x = stRoot.x - (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
         stRoot.setLeft( newNode );
+      }
       else //recurse down left subtree
-      insertF( stRoot.getLeft(), newNode );
+      insertF( stRoot.getLeft(), newNode, col + 1 );
       return;
     } else { // new val >= curr, so look down right subtree
       //if no right child, make newNode the right child
-      if ( stRoot.getRight() == null )
-        stRoot.setRight(newNode);
+      if ( stRoot.getRight() == null ) {
+        
+        newNode.x = stRoot.x + (distx / 2);
+        newNode.y = stRoot.y + 100;
+        newNode.parentX = stRoot.x;
+        newNode.parentY = stRoot.y;
+        stRoot.setRight( newNode );
+      }
       else //recurse down right subtree
-      insertF( stRoot.getRight(), newNode );
+      insertF( stRoot.getRight(), newNode, col + 1 );
       return;
     }
   }//end insert()
@@ -76,14 +109,17 @@ class Tree {
     //println(order.size());
   }
   
-    public void traverse( TreeNode currNode )
-  {
-    if ( currNode == null ) //stepped beyond leaf
+  public void traverse( TreeNode currNode ) {
+    if ( currNode == null ) {//stepped beyond leaf
       return;
+  }
     //println(currNode.getStatus().getUser().getFollowersCount());
-    order.add(currNode.getStatus());
-    traverse( currNode.getLeft() );
-    traverse( currNode.getRight() );
+    
+      order.add(currNode.getStatus());
+      traverse( currNode.getLeft() );
+      traverse( currNode.getRight() );
+
+
   }
   
   public ArrayList getOrder() {
@@ -93,5 +129,41 @@ class Tree {
   
   public void process() {
     Status retStat = _root.getStatus();
+  }
+  
+  void update() {
+    numPrinted = 0;
+    createTree(_root); 
+  }
+   
+  void createTree(TreeNode currNode) {
+     fill(255);
+     if ( currNode == null) {//stepped beyond leaf
+      return;
+    }
+    if (currNode.y > 496)
+      numPrinted = 6;
+    else
+      numPrinted = 0;
+    
+    if (numPrinted > 5) 
+      return;
+      
+    if (currNode.getLeft() != null && currNode.y != 496) {
+      stroke(255);
+      line(currNode.x, currNode.y, currNode.left.x, currNode.left.y);
+    }
+    if (currNode.getRight() != null && currNode.y != 496) {
+      stroke(255);
+      line(currNode.x, currNode.y, currNode.right.x, currNode.right.y);
+    }
+    System.out.println(currNode.y);
+    noStroke();
+    ellipse(currNode.x, currNode.y, 40, 40);
+    fill(0);
+    textSize(15);
+    text(currNode.followers, currNode.x - 15, currNode.y + 5);
+    createTree(currNode.getLeft());
+    createTree(currNode.getRight());
   }
 }

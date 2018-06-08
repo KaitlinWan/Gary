@@ -88,8 +88,8 @@ Worked on location and geotagging of tweets, and revised README
 SQUADDED UP AT WHOLE FOODS!!!
 worked on adding to binary tree functionality: added methods to add and sort tweets within the tree; completed structure to hold retrieved tweets; added heap structure and the methods to sort by different means; revised README; added functionality to display additional information about each tweet.
 :Eric Wong
-created the visual representation of the heap and binary tree in processing
-:J osh
+created the visual representation of the heap and binary trees in processing, fixed adding and swapping algorithms for heaps and binary search trees. Revised landing page, buttons, and README. 
+:Joshua Weiner
 created home page that allows user to post a tweet or search for a query
 : Kaitlin
  

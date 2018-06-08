@@ -4,15 +4,22 @@ import twitter4j.*;
 import java.util.*; 
 
 ArrayList<Button> buttons = new ArrayList<Button>();
+ArrayList<Button> start = new ArrayList<Button>();
 
 int frameCount = 0;
 PFont font;
+PImage img;
 boolean askQ = true;
 boolean show = false;
-boolean canSearch = true;
+boolean canSearch = false;
+boolean canSearchp = false;
+boolean startup = true;
 boolean sorted = false;
+boolean wannalook = false;
+boolean wannado = false;
 boolean limit = true;
 String words = "";
+String pText = "";
 char letter;
 
 /*The following is a variable that indicates the sortBy method:
@@ -78,9 +85,45 @@ void setup() {
   buttons.add(minHeap);
   buttons.add(maxHeap);
   buttons.add(binaryTree);
+  img = loadImage("logo.png");
+
 }
 
 void draw() {
+   if(startup){
+  background(255);
+  fill(0,0,0);
+  textSize(60);
+  text("Welcome to Tweetalize", 200, 100);
+  image(img, 350, 200,img.width/2.5, img.height/2.5);
+  
+  Button post = new Button(width - 360, height - 90, 200, 50, "post");
+  start.add(post);
+  Button search = new Button(width - 360, height - 160, 200, 50, "search");
+  start.add(search);
+  
+  for (Button b : start) {
+      b.update();
+    }
+    update(mouseX, mouseY, start);
+  
+  }
+  
+   if(wannado){
+    canSearchp = true;
+    background(255);
+    fill(0,0,0);
+    textSize(60);
+    tweetthis("What's on your mind?");
+    textSize(36);
+    text(words, 50, 60, 500, 300);
+  }
+  else{
+    canSearchp = false;
+  }
+
+  if(wannalook){
+    canSearch = true;
   prompt("hello, please enter your search query below");
   //background(255);
   if (!askQ) {
@@ -164,6 +207,10 @@ void draw() {
       }
     }
   }
+  }
+  else{
+        canSearch = false;
+  }
   //else {
 }
 
@@ -187,6 +234,42 @@ void keyTyped() {
       canSearch = false;
     }
   }
+  
+  if(canSearchp){
+    print(key);
+    if(pText.length() < 280){
+    if ((key == BACKSPACE) && pText.length() > 0) {
+      pText = pText.substring(0, pText.length()-1);
+    } else if (key == ENTER) {
+      q = pText;
+      canSearchp = false;
+      try{
+      Status status = twitter.updateStatus(pText);
+      System.out.println("Successfully updated the status to [" + status.getText() + "].");
+      }
+      catch (TwitterException te) {
+            te.printStackTrace();
+            System.out.println("Failed to get timeline: " + te.getMessage());
+            System.exit(-1);
+      }
+      wannado = false;
+      startup = true;
+    }
+    else{
+            letter = key;
+      pText = pText + key;
+    }
+    }
+    else{
+      if((key == BACKSPACE) && pText.length() > 0) {
+      pText = pText.substring(0, pText.length()-1);
+      }
+    }
+      
+}
+
+  
+  
 }
 
 void mouseClicked() {
@@ -232,6 +315,12 @@ void update(int x, int y, ArrayList<Button> buttons) {
         words = "";
         currList = new ArrayList<Status>(0);
         index = 0;
+      } else if (buttons.get(i).text == "search"){
+        wannalook = true;
+        startup = false;
+      } else if (buttons.get(i).text == "post"){
+        wannado = true;
+        startup = false;
       }
     }
     }
@@ -278,3 +367,13 @@ void prompt(String q) {
   text(words, 50, 60, 500, 300);
   //currlist to tree, depending on method selected
 }
+
+void tweetthis(String a){
+  background(225);
+  textSize(60);
+  text(a, 200, 100);
+  textSize(36);
+  text(pText, 100, 150, 800, 500);
+}
+    
+  

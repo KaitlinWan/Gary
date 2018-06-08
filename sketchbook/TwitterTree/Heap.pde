@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class Heap {
   private ArrayList<TreeNode> _heap;
   Tree heapTree = new Tree();
-
+  int sortM = 0;
+  
   Heap() {
     _heap = new ArrayList<TreeNode>();
   }
@@ -37,6 +38,7 @@ public class Heap {
 
 
   public void insert(Status s, int toSort, int struct) {
+    sortM = toSort;
     TreeNode status = new TreeNode(s, 0, 0);
     if (toSort == 1)
       addRT(status, struct);
@@ -233,9 +235,11 @@ public class Heap {
   
   void update() {
     //numPrinted = 0;
+    heapTree = new Tree();
     for (int i = 0; i < _heap.size(); i ++) {
-      System.out.println(i + ": " + _heap.get(i)._cargo.getUser().getFollowersCount());
+      heapTree.insert(_heap.get(i)._cargo, sortM);
     }
+    heapTree.update();
   }
    
 }

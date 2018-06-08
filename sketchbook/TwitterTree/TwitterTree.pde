@@ -91,7 +91,7 @@ void draw() {
     fill(255);
     text("Welcome to GaryTwitter!", 50, 70);
     if (currList.size() == 0)
-       text("Oop! Looks like no results came up for that search. Try again!", 50, 130);
+       text("Oop! Looks like no results came up for " + words + ". Try again!", 50, 130);
     else
        text("Select what metric you want to organize your query by, and how you want to visualize the data!", 50, 100);
 

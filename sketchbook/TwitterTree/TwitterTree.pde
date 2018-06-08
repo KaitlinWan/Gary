@@ -256,7 +256,7 @@ void queryTwitter(String search) {
 void sort() {
   sorted = true;
   tweetTree._root = null;
-  tweetHeap = new Heap();
+  tweetHeap.heapTree._root = null;
 }
 
 

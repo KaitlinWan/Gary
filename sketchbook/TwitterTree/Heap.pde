@@ -237,9 +237,86 @@ public class Heap {
     //numPrinted = 0;
     heapTree = new Tree();
     for (int i = 0; i < _heap.size(); i ++) {
-      heapTree.insert(_heap.get(i)._cargo, sortM);
+      if (i == 0) {
+        if (_heap.size() == 1) {
+          _heap.get(i).setLeft(null);
+          _heap.get(i).setRight(null);
+        }
+        else if (_heap.size() == 2) {
+          _heap.get(i).setLeft(_heap.get(1));
+          _heap.get(i).getLeft().setParent(_heap.get(i));
+          _heap.get(i).setRight(null);
+        }
+        else {
+          _heap.get(i).setLeft(_heap.get(1));
+          _heap.get(i).getLeft().setParent(_heap.get(i));
+          _heap.get(i).setRight(_heap.get(2));
+          _heap.get(i).getRight().setParent(_heap.get(i));
+
+        }
+      }
+      else {
+        if ( _heap.size() <= ((i * 2) + 1)) {
+          _heap.get(i).setLeft(null);
+          _heap.get(i).setRight(null);
+        }
+        else if ((_heap.size() <= (i * 2) + 2)) {
+          _heap.get(i).setLeft(_heap.get((i * 2) + 1));
+          _heap.get(i).getLeft().setParent(_heap.get(i));
+
+          _heap.get(i).setRight(null);
+        }
+        else {
+          _heap.get(i).setLeft(_heap.get((i * 2) + 1));
+          _heap.get(i).getLeft().setParent(_heap.get(i));
+          _heap.get(i).setRight(_heap.get((i * 2) + 2));
+          _heap.get(i).getRight().setParent(_heap.get(i));
+        }
+      }
     }
-    heapTree.update();
+    for (int i = 0; i < _heap.size(); i ++) {
+      if (i == 0) {
+        if (1 == _heap.size()) {
+          _heap.get(i).x = width / 2;
+          _heap.get(i).y = 100;
+        }
+        else if (2 == _heap.size()) {
+          _heap.get(i).getLeft().x = _heap.get(i).x - 200;
+          _heap.get(i).getLeft().y = _heap.get(i).y + 100;
+        }
+        else {
+          _heap.get(i).getLeft().x = _heap.get(i).x - 200;
+          _heap.get(i).getLeft().y = _heap.get(i).y + 100;
+          _heap.get(i).getRight().x = _heap.get(i).x + 200;
+          _heap.get(i).getRight().y = _heap.get(i).y + 100;
+        }
+      }
+      else {
+        if (((i * 2) + 2) == _heap.size()) {
+          _heap.get(i).getLeft().x = _heap.get(i).x - (abs(_heap.get(i).x - _heap.get(i).getParent().x) / 2);
+          _heap.get(i).getLeft().y = _heap.get(i).y + 150;
+        }
+        else if (_heap.size() > ((i * 2) + 2)){
+          _heap.get(i).getLeft().x = _heap.get(i).x - (abs(_heap.get(i).x - _heap.get(i).getParent().x) / 2);
+          _heap.get(i).getLeft().y = _heap.get(i).y + 150;
+          _heap.get(i).getRight().x = _heap.get(i).x + (abs(_heap.get(i).x - _heap.get(i).getParent().x) / 2);
+          _heap.get(i).getRight().y = _heap.get(i).y + 150;
+        }
+      }
+    }
+    int in = 15;
+    for (TreeNode t : _heap) {
+      fill(255);
+      noStroke();
+      if (in > 0) {
+        ellipse(t.x, t.y, 40, 40);
+        fill(0);
+        textSize(15);
+        text(t._cargo.getUser().getFollowersCount(), t.x - 10, t.y + 5);
+      }
+      in --;
+      
+    }
   }
    
 }

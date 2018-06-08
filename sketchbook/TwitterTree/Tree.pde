@@ -54,7 +54,8 @@ class Tree {
       else //recurse down left subtree
       insertRT( stRoot.getLeft(), newNode, col + 1 );
       return;
-    } else { // new val >= curr, so look down right subtree
+    } 
+    else { // new val >= curr, so look down right subtree
       //if no right child, make newNode the right child
       if ( stRoot.getRight() == null ) {
         newNode.x = stRoot.x + (stRoot.x / col);
@@ -77,7 +78,7 @@ class Tree {
     if ( rootFollowers > newFollowers) {
       //if no left child, make newNode the left child
       if ( stRoot.getLeft() == null ) {
-        newNode.x = abs(width - stRoot.x) / 2;
+        newNode.x = stRoot.x;
         newNode.y = stRoot.y + 100;
         newNode.parentX = stRoot.x;
         newNode.parentY = stRoot.y;
@@ -139,19 +140,12 @@ class Tree {
      if ( currNode == null) {//stepped beyond leaf
       return;
     }
-    if (currNode.y > 496)
-      numPrinted = 6;
-    else
-      numPrinted = 0;
-    
-    if (numPrinted > 5) 
-      return;
-      
-    if (currNode.getLeft() != null && currNode.y != 496) {
+   
+    if (currNode.getLeft() != null) {
       stroke(255);
       line(currNode.x, currNode.y, currNode.left.x, currNode.left.y);
     }
-    if (currNode.getRight() != null && currNode.y != 496) {
+    if (currNode.getRight() != null) {
       stroke(255);
       line(currNode.x, currNode.y, currNode.right.x, currNode.right.y);
     }

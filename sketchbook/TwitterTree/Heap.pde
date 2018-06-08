@@ -246,12 +246,14 @@ public class Heap {
        heapTree._root = _heap.get(index);
     }
     else {
-      heapTree._root = _heap
+      heapTree._root = _heap;
     }
+    
     else if (index < 7) {
        posX = (width / 5) * (index / 3);
        posY = 260;
     }
+    
     else
       return;
       

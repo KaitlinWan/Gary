@@ -329,7 +329,7 @@ public class Heap {
           text = t._cargo.getUser().getFollowersCount() + " ";
         else 
           text = t._cargo.getFavoriteCount()+ " ";
-        fill(255)
+        fill(255);
         ellipse(t.x, t.y, textWidth(text), textWidth(text));
         fill(0);
         textSize(15);        

@@ -75,7 +75,7 @@ void setup() {
   buttons.add(sort);
   Button Retweets = new Button(width - 480, height - 370, 200, 50, "Retweets");
   Button followers = new Button(width - 480, height - 300, 200, 50, "Followers");
-  Button location = new Button(width - 480, height - 230, 200, 50, "QLocation");
+  Button location = new Button(width - 480, height - 230, 200, 50, "Favorites");
   Button minHeap = new Button(width - 240, height - 230, 200, 50, "Min Heap");
   Button maxHeap = new Button(width - 240, height - 300, 200, 50, "Max Heap");
   Button binaryTree = new Button(width - 240, height - 370, 200, 50, "Binary Tree");
@@ -300,7 +300,7 @@ void update(int x, int y, ArrayList<Button> buttons) {
         sortBy = 1;
       } else if (buttons.get(i).text == "Followers") {
         sortBy = 2;
-      } else if (buttons.get(i).text == "QLocation") {
+      } else if (buttons.get(i).text == "Favorites") {
         sortBy = 3;
       } else if (buttons.get(i).text == "Min Heap") {
         struct = 3;

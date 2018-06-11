@@ -25,7 +25,7 @@ they can type something and using the twitter api, it'll post! Try it out!
 ## Launch Instructions
 1. Clone our repo
 2. Proceed to Gary/sketchbook/TwitterTree/
-3. Inside TwitterTree, copy the folder called "twitter4j01" into your local processing libraries folder. (That is all you need to do because we took care of all the hard work specially for you!)
+3. Inside TwitterTree, copy the folder called "twitter4j401" into your local processing libraries folder. (That is all you need to do because we took care of all the hard work specially for you!)
 4. Go to Gary/sketchbook/TwitterTree/ and run TwitterTree.pde in processing
 5. Press the play icon on the top left corner
 6. Enjoy!
